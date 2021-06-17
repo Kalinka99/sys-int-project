@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista artykułów{% endblock %}
+
+{% block body %}
+{#    {% if articles is defined and articles|length %}#}
+
+{#        <div class="nav text-center">#}
+{#            {{ knp_pagination_render(articles) }}#}
+{#        </div>#}
+
+{#        <table class="table table-striped">#}
+{#            <thead>#}
+{#            <tr>#}
+{#                <th>{{ knp_pagination_sortable(articles, 'article.id'|trans, 't.id') }}</th>#}
+{#                <th>{{ knp_pagination_sortable(articles, 'article.title'|trans, 't.title') }}</th>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#            {% for article in articles %}#}
+{#                <tr>#}
+{#                    <td>{{ article.id }}</td>#}
+{#                    <td>{{ article.title }}</td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+
+{#        <div class="nav text-center">#}
+{#            {{ knp_pagination_render(articles) }}#}
+{#        </div>#}
+
+{#    {% else %}#}
+{#        <p>#}
+{#            {{ 'empty_list'|trans }}#}
+{#        </p>#}
+{#    {% endif %}#}
+
+{#{% endblock %}#}
+
+    {% if app.user %}
+    <button style="margin: 8% 0 -20% 45%;"><a href="{{ path('articles_new') }}">UTWÓRZ NOWY</a></button>
+    {% endif %}
+    {% if app.user %}
+    <table style="margin-top: 1%;" class="table">
+    {% else %}
+    <table style="margin-top: 5%;" class="table">
+     {% endif %}
+        <thead>
+            <tr>
+                <th>UTWORZONO</th>
+                <th>TYTUŁ</th>
+                <th>AUTOR</th>
+                <th>KATEGORIA</th>
+                <th>AKCJE</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.created ? article.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.title }}</td>
+                <td>Admin</td>
+                <td>Kategoria</td>
+                <td>
+                   <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">ZOBACZ</a></button>
+                    {% if app.user %}
+                   <button class="editButton"><a href="{{ path('articles_edit', {'id': article.id}) }}">EDYTUJ</a></button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

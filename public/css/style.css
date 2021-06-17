@@ -1,0 +1,151 @@
+body{
+    background-color: black;
+    color: white;
+    font-family: "Verdana";
+}
+#top{
+    border-bottom: 3px solid white;
+    padding-left: 2%;
+    margin-bottom: -5%;
+    width: 90%;
+    margin-left: 4% ;
+}
+#nav li{
+    list-style-type: none;
+    display: inline;
+    padding-left: 5%;
+}
+#nav li a{
+    text-decoration: none;
+    color: white;
+}
+#nav li a:hover{
+    color: purple;
+}
+#nav{
+    padding-left: 30%;
+    font-size: 140%;
+    padding-top: -5%;
+    margin-bottom: 5%;
+    padding-bottom: -5%;
+}
+#login{
+    float: right;
+    text-decoration: none;
+    color: white;
+    padding-right: 5%;
+}
+#login a{
+    text-decoration: none;
+    color: white;
+}
+#login a:hover{
+    color:purple;
+}
+input{
+    background-color: black;
+    color: gray;
+    padding: 1%;
+    border: 1px solid white;
+    border-radius: 20px;
+}
+button{
+    background-color: purple;
+    color: white;
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+button:hover{
+    cursor: pointer;
+}
+textarea{
+    background-color: black;
+    color: gray;
+    padding: 1%;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin-bottom: 2%;
+    font-family: 'Verdana';
+}
+
+#comment_section{
+    margin-top: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+table{
+    padding: 2%;
+    margin-top: 10%;
+    margin-left: 10%;
+    width: 80%;
+}
+th{
+    border-bottom: 3px solid purple;
+    background-color: purple;
+}
+
+td{
+    padding-right: 10%;
+    border-bottom: 3px solid purple;
+    padding: 4%;
+    text-align: center;
+}
+.deleteButton{
+    padding:1%;
+    background-color: darkred;
+}
+.deleteButton:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.editButton{
+    padding: 1%;
+    background-color: midnightblue;
+}
+.editButton:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.readButton{
+    padding: 1%;
+    background-color: #1b9448;
+}
+.readButton:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+#picture{
+    width: 40%;
+    margin-top: 10%;
+    margin-left: 30%;
+
+
+}
+button a{
+    color: white;
+    text-decoration: none;
+}
+#comments{
+    margin-top: 5%;
+    width: 85%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+#comments h3{
+    color: purple;
+}
+#singlecomment{
+    border-bottom: 3px solid white;
+    padding-top: 2%;
+    padding-bottom: 1%;
+}
+#artykuł{
+    margin-top: 8%;
+    width: 60%;
+    margin-left: 20%;
+}
+#artykuł h1{
+    color: purple;
+}

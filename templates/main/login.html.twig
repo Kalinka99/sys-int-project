@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+    {% block title %}
+        Zaloguj się
+    {% endblock %}
+    {% block body %}
+        </div>
+        <p style="margin-top: 10%; text-align: center; padding-left: 5%; padding-right: 5%; color:purple; font-size: 20px">Zaloguj się!</p><br>
+        <form style=" text-align: center; padding-left: 5%; padding-right: 5%; font-size: 18px">
+                <label for="username"><p>Login</p></label>
+                <input type="text" placeholder="Nazwa użytkownika" name="username" required><br><br>
+                <label for="psw"><p>Hasło</p></label>
+                <input type="password" placeholder="Hasło" name="psw" required><br><br>
+                <button type="submit">Zaloguj się</button>
+        </form>
+    {% endblock %}

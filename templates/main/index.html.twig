@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+    {% block title %}
+        Witaj!
+    {% endblock %}
+    {% block body %}
+        <div>
+            {% if articles is defined %}
+                <table style="color: white" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>UTWORZONO</th>
+                        <th>TYTUŁ</th>
+                        <th>KATEGORIA</th>
+                        <th>AKCJE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for article in articles %}
+                        <tr>
+                            <td>{{ article.created|date('Y/m/d  h:i') }}</td>
+                            <td>{{ article.title }}</td>
+                            <td>Kategoria</td>
+                            <td>
+                                    <button class="readButton"><a href="{{ path('read') }}">ZOBACZ</a></button>
+                                {% if app.user %}
+                                    <button class="editButton">EDYTUJ</button>
+                                    <button class="deleteButton">USUŃ</button>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+{#            <div class="navigation text-center">#}
+{#                {{ knp_pagination_render(pagination) }}#}
+{#            </div>#}
+    {% endblock %}

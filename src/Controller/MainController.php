@@ -27,6 +27,7 @@ class MainController extends AbstractController
     }
     /** @Route(
      *     "/about",
+     *     name="about",
      * )
      */
     public function about(): Response

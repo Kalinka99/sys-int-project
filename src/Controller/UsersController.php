@@ -25,28 +25,6 @@ class UsersController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="users_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('users_index');
-        }
-
-        return $this->render('users/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="users_show", methods={"GET"})
@@ -63,32 +41,28 @@ class UsersController extends AbstractController
      */
     public function edit(Request $request, Users $user): Response
     {
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UsersType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
+            if (!empty($form->getData()['password'])) {
+                $user->setPassword(password_hash($form->getData()['password'], PASSWORD_BCRYPT));
+            }
+
+            if (strcmp($form->getData()['email'], $user->getEmail()) !== 0){
+                $user->setEmail($form->getData()['email']);
+            }
+
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('users_index');
         }
 
         return $this->render('users/edit.html.twig', [
             'user' => $user,
+            'email'=> $user->getEmail(),
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="users_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Users $user): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('users_index');
     }
 }

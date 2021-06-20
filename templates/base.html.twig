@@ -8,7 +8,7 @@
 </head>
 <body>
 {% if app.user %}
-    <p id="login">Witaj, admin! <a href="{{ path('app_logout') }}">Wyloguj się</a></p>
+    <p id="login">Witaj, admin!   <a href="{{ path('users_index') }}">Twój profil </a><a href="{{ path('app_logout') }}">Wyloguj się</a></p>
 {% else %}
     <p style="color: purple" id="login"><a href="/login">Zaloguj się</a></p>
 {% endif %}

@@ -1,26 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categories index{% endblock %}
+{% block title %}Lista kategorii{% endblock %}
 
 {% block body %}
-    <h1>Categories index</h1>
 
-    <table class="table">
+    <button style="margin: 8% 0 -20% 44%;">
+        <a href="{{ path('categories_new') }}">STWÓRZ NOWĄ KATEGORIĘ</a>
+    </button>
+    <table style="margin-top: 2%; margin-bottom: 3%" class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th>NAZWA KATEGORII</th>
+                <th>AKCJE</th>
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
-                <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
                 <td>
-                    <a href="{{ path('categories_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('categories_edit', {'id': category.id}) }}">edit</a>
+                    <button class="readButton">
+                        <a href="{{ path('categories_show', {'id': category.id}) }}">ZOBACZ</a>
+                    </button>
+                    <button class="editButton">
+                        <a href="{{ path('categories_edit', {'id': category.id}) }}">EDYTUJ</a>
+                    </button>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +35,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('categories_new') }}">Create new</a>
+
+
 {% endblock %}

@@ -6,6 +6,8 @@ use App\Entity\Articles;
 use App\Entity\Categories;
 use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
+use App\Repository\CategoriesRepository;
+use App\Repository\CommentsRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,30 +42,38 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/articles/list/{page}", methods={"GET"})
+     * @Route("/{page<\d+>?1}", name="articles_index", methods={"GET"})
      */
-    public function list(string $page): Response
+    public function index(int $page, CategoriesRepository $categoriesRepository): Response
     {
-        $articles = $this->articleRepository->findAll();
-        $articles = $this->paginator->paginate($articles, $page, ArticlesRepository::PAGE_LIMIT);
 
-        return $this->render(
-            'articles/index.html.twig',
-            ['articles' => $articles]
-        );
-    }
-
-
-    /**
-     * @Route("/", name="articles_index", methods={"GET"})
-     */
-    public function index(ArticlesRepository $articlesRepository): Response
-    {
+        $articles = $this->articleRepository->findBy([], ['id'=>'DESC']);
+        $articles = $this->paginator->paginate($articles, $page,    10);
 
         return $this->render('articles/index.html.twig', [
-            'articles' => $articlesRepository->findAll(),
+            'articles' => $articles,
+            'categories' => $categoriesRepository->findAll(),
+
         ]);
     }
+
+    /**
+     * @Route("/{page<\d+>?1}/{categoryId}", name="articles_by_category", methods={"GET"})
+     */
+    public function articlesCategory(int $page, int $categoryId): Response
+    {
+
+        $category = $this->getDoctrine()->getRepository(Categories::class)->findOneById($categoryId);
+        $articles = $category->getArticles();
+        $articles = $this->paginator->paginate($articles, $page,    10);
+
+        return $this->render('articles/index.html.twig', [
+            'articles' => $articles,
+            'categories' => $this->getDoctrine()->getRepository(Categories::class)->findAll(),
+
+        ]);
+    }
+
 
     /**
      * @Route("/new", name="articles_new", methods={"GET","POST"})
@@ -101,12 +111,12 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="articles_show", methods={"GET"})
+     * @Route("/show/{id}", name="articles_show", methods={"GET"})
      */
     public function show(Articles $article): Response
     {
         return $this->render('articles/show.html.twig', [
-            'article' => $article,
+            'article' => $article
         ]);
     }
 

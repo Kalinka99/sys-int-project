@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Entity\Categories;
+use App\Entity\Comments;
 use App\Form\ArticlesType;
+use App\Form\CommentsType;
 use App\Repository\ArticlesRepository;
 use App\Repository\CategoriesRepository;
 use App\Repository\CommentsRepository;
@@ -59,6 +61,9 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/{page<\d+>?1}/{categoryId}", name="articles_by_category", methods={"GET"})
+     * @param int $page
+     * @param int $categoryId
+     * @return Response
      */
     public function articlesCategory(int $page, int $categoryId): Response
     {
@@ -113,10 +118,32 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/show/{id}", name="articles_show", methods={"GET"})
      */
-    public function show(Articles $article): Response
+    public function show(Articles $article, Request $request): Response
     {
+        $doctrine = $this->getDoctrine();
+        $comment = new Comments();
+        $form = $this->createForm(CommentsType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+
+            $data = $form->getData();
+            $comment = (new Comments())
+                ->setAuthorUsername($data['authorUsername'])
+                ->setAuthorEmail($data['authorEmail'])
+                ->setMainText($data['mainText'])
+                ->setCreated(new \DateTime('now'))
+                ->setArticles($this->getArticle());
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+        }
+
         return $this->render('articles/show.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'comment' => $comment,
+            'form' => $form->createView()
         ]);
     }
 

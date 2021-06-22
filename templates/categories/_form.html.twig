@@ -1,4 +1,7 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div style="margin-left: 44%">
+    {{ form_label(form, 'Nazwa') }}
+    {{ form_widget(form.name) }}
+</div>
+    <button style="margin-top: 2%; margin-left: 50%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

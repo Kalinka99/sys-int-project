@@ -1,8 +1,36 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_label(form, "Tytuł") }}
-    {{ form_widget(form) }}
+<style>
+    .choice{
+        border: 1px solid white;
+        color: white;
+        background-color: black;
+        margin-top: 1%;
+        padding: 1%;
+        border-radius: 20px;
+    }
+</style>
+<div style="margin-left: 5%">
+    {{ form_label(form.title, 'Tytuł') }}
+</div>
+<div style="margin-left: 5%">
+    {{ form_widget(form.title) }}
+</div>
+<div style="margin-left: 5%; margin-top: 1%">
+    {{ form_label(form.mainText, 'Tekst artykułu') }}
+</div>
+<div style="margin-left: 5%;">
+    {{ form_widget(form.mainText, { 'attr': {
+        'rows' : '15',
+        'cols' : '100' }}) }}
+</div>
+<div style="margin-left: 5%; margin-top: 1%">
+    {{ form_label(form.categories, 'Wybierz kategorię:') }}
+</div>
+<div style="margin-left: 5%;">
+    {{ form_widget(form.categories, { 'attr' : {
+        'class' : 'choice'
+    }}) }}
+</div>
 
-{#<small>{{ form_widget(form) }}</small>#}
-
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button style="margin-left: 5%; margin-top: 1%; margin-bottom: 3%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

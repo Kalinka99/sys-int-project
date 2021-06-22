@@ -14,12 +14,7 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.email }}</td>
-{#                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
-{#                <td>{{ user.password }}</td>#}
                 <td>
-                    <button class="readButton">
-                        <a href="{{ path('users_show', {'id': user.id}) }}">ZOBACZ</a>
-                    </button>
                     <button class="editButton">
                         <a href="{{ path('users_edit', {'id': user.id}) }}">EDYTUJ DANE</a>
                     </button>

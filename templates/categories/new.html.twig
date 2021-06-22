@@ -1,11 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Categories{% endblock %}
+{% block title %}Dodaj nową kategorię{% endblock %}
 
 {% block body %}
-    <h1>Create new Categories</h1>
-
+    <h3 style="color:purple; margin-left: 44%; margin-top: 8%;">Stwórz nową kategorię</h3>
     {{ include('categories/_form.html.twig') }}
-
-    <a href="{{ path('categories_index') }}">back to list</a>
 {% endblock %}

@@ -1,4 +1,14 @@
 {{ form_start(form) }}
+<style>
+    .form_group{
+        margin-left: 45%;
+        margin-bottom: 2%;
+    }
+    .form_password{
+        margin-left: 45%;
+    }
+</style>
+<h3 style="margin-top: 8%; color: purple; margin-left: 47%">Edytuj dane</h3>
 <div class="form_group">
     <div class="form_label">
         {{ form_label(form.email) }}
@@ -10,6 +20,9 @@
         {{ form_errors(form.email) }}
     </div>
 </div>
+<div class="form_password">
+    {{ form_label(form.password, 'Nowe hasło') }}
     {{ form_widget(form.password) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+</div>
+    <button style="margin-left: 48.5%; margin-top: 2%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
 {{ form_end(form) }}

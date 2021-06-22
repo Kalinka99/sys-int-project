@@ -8,5 +8,72 @@
     <button style="margin-left: 46%">
         <a href="{{ path('categories_edit', {'id': category.id}) }}">ZMIEŃ NAZWĘ</a>
     </button>
-    {{ include('categories/_delete_form.html.twig') }}
+    <div style="margin-left: 48%; margin-top: 1%">
+        {{ include('categories/_delete_form.html.twig') }}
+    </div>
+
+
+    <table style="margin-top: 5%;" class="table">
+    <thead>
+    <tr>
+        <th>UTWORZONO</th>
+        <th>TYTUŁ</th>
+        <th>AUTOR</th>
+        <th>KATEGORIA</th>
+        <th>AKCJE</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for article in articles %}
+        <tr>
+            <td>{{ article.created ? article.created|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ article.title }}</td>
+            <td>{{ article.getUsers().getEmail() }}</td>
+            <td>{{ article.getCategories().getName() }}</td>
+            <td>
+                <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">ZOBACZ</a></button>
+                {% if app.user %}
+                    <button class="editButton"><a href="{{ path('articles_edit', {'id': article.id}) }}">EDYTUJ</a></button>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Brak artykułów</td>
+        </tr>
+    {% endfor %}
+</table>
+{#    <div class="nav text-center">#}
+{#        <style>#}
+{#            .pagination {#}
+{#                list-style-type: none;#}
+{#                display: flex;#}
+{#                width: 100%;#}
+{#                justify-content: center;#}
+{#            }#}
+
+{#            .pagination .page-item {#}
+{#                display: block;#}
+{#            }#}
+
+{#            .pagination .page-item .page-link {#}
+{#                display: block;#}
+{#                width: 100%;#}
+{#                color: white;#}
+{#                text-decoration: none;#}
+{#                padding: 4px 8px;#}
+{#                text-align: center;#}
+{#                margin-bottom: 2%;#}
+{#            }#}
+
+{#            .pagination .page-item.active .page-link {#}
+{#                color: purple;#}
+{#            }#}
+
+{#            .pagination .page-item.disabled .page-link {#}
+{#                color: black;#}
+{#            }#}
+{#        </style>#}
+{#        {{ knp_pagination_render(articles) }}#}
+{#    </div>#}
 {% endblock %}

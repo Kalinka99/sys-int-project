@@ -3,14 +3,14 @@
 {% block title %}Witaj na moim blogu!{% endblock %}
 
 {% block body %}
-        <div style="margin-top:8%; margin-bottom: -6%; text-align: center; display: flex;justify-content: center;z-index: 99">
+        <div style="margin-top:8%; margin-bottom: 4%; text-align: center; display: flex; justify-content: center; z-index: 99">
         {% for category in categories %}
-                <a style="text-decoration: none; font-size:20px; color: purple;display:block" href="{{ path('articles_by_category', {'categoryId':category.id}) }}">{{ category.name }} * </a>
+                <a style="text-decoration: none; padding-right: 2%; font-size:20px; color: purple; display:block" href="{{ path('articles_by_category', {'categoryId':category.id}) }}">{{ category.name }}  </a>
         {% endfor %}
         </div>
     {% if app.user %}
-    <button style="margin: 8% 0 -20% 45%;"><a href="{{ path('categories_index') }}">EDYTUJ KATEGORIE</a></button>
-    <button style="margin: 2% 0 -20% 44%;"><a href="{{ path('articles_new') }}">UTWÓRZ NOWY ARTYKUŁ</a></button>
+    <button style="margin: 0 0 0 37%;"><a href="{{ path('categories_index') }}">EDYTUJ KATEGORIE</a></button>
+    <button><a href="{{ path('articles_new') }}">UTWÓRZ NOWY ARTYKUŁ</a></button>
     {% endif %}
     {% if app.user %}
     <table style="margin-top: 1%;" class="table">
@@ -63,18 +63,19 @@
                 .pagination .page-item .page-link {
                     display: block;
                     width: 100%;
-                    background-color: #fff;
-                    color: #000;
+                    color: white;
+                    text-decoration: none;
                     padding: 4px 8px;
                     text-align: center;
+                    margin-bottom: 2%;
                 }
 
                 .pagination .page-item.active .page-link {
-                    background-color: #1b9448;
+                    color: purple;
                 }
 
                 .pagination .page-item.disabled .page-link {
-                    background-color: #666;
+                    display: none;
                 }
             </style>
             {{ knp_pagination_render(articles) }}

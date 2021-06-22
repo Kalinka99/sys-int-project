@@ -1,4 +1,29 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div style="margin-left: 19%">
+    <h3 style="color: purple">Dodaj komentarz</h3>
+    <div style="margin-top: 1%">
+        {{ form_label(form.authorUsername, 'Nick') }}
+    </div>
+    <div>
+        {{ form_widget(form.authorUsername) }}
+    </div>
+    <div style="margin-top: 1%">
+        {{ form_label(form.authorEmail, 'Email') }}
+    </div>
+    <div>
+        {{ form_widget(form.authorEmail) }}
+    </div>
+    <div style="margin-top: 1%;">
+        {{ form_label(form.mainText, 'Treść komentarza') }}
+    </div>
+    <div>
+        {{ form_widget(form.mainText, { 'attr' : {
+            'rows' : '10',
+            'cols' : '50'
+        }}) }}
+    </div>
+</div>
+
+
+    <button style="margin-left: 19%; margin-bottom: 3%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Categories{% endblock %}
+{% block title %}Edytuj Kategorię{% endblock %}
 
 {% block body %}
-    <h1>Edit Categories</h1>
 
-    {{ include('categories/_form.html.twig', {'button_label': 'Update'}) }}
+    <h3 style="color:purple; margin-left: 44%; margin-top: 8%;">Zmień nazwę kategorii</h3>
 
-    <a href="{{ path('categories_index') }}">back to list</a>
-
-    {{ include('categories/_delete_form.html.twig') }}
+    {{ include('categories/_form.html.twig', {'button_label': 'ZAPISZ'}) }}
+    <div style="margin-left: 51%; margin-top: 1%">
+        {{ include('categories/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

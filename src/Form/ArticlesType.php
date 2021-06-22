@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Articles;
+use PhpParser\Node\Stmt\Label;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,6 +21,7 @@ class ArticlesType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'required' => true,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Uzupełnij to pole.'
@@ -32,6 +34,7 @@ class ArticlesType extends AbstractType
 
             ])
             ->add('mainText', TextareaType::class, [
+                'required' => true,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Uzupełnij to pole.'

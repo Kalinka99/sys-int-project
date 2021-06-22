@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+
 /**
  * @Route("/categories")
  */
@@ -53,8 +56,14 @@ class CategoriesController extends AbstractController
      */
     public function show(Categories $category): Response
     {
+        $category = $this->getDoctrine()->getRepository(Categories::class)->findOneById($category);
+        $articles = $category->getArticles();
+
+
         return $this->render('categories/show.html.twig', [
+            'articles' => $articles,
             'category' => $category,
+            'categories' => $this->getDoctrine()->getRepository(Categories::class)->findAll(),
         ]);
     }
 

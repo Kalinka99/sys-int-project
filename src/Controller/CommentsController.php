@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Articles;
+use App\Entity\Categories;
 use App\Entity\Comments;
 use App\Form\CommentsType;
 use App\Repository\CommentsRepository;
@@ -36,6 +38,15 @@ class CommentsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $data = $form->getData();
+            $comment = (new Comments())
+                ->setAuthorUsername($data['authorUsername'])
+                ->setAuthorEmail($data['authorEmail'])
+                ->setMainText($data['mainText'])
+                ->setCreated(new \DateTime('now'))
+                ->setArticles($this->getArticle());
+
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -58,25 +69,6 @@ class CommentsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="comments_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Comments $comment): Response
-    {
-        $form = $this->createForm(CommentsType::class, $comment);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('comments_index');
-        }
-
-        return $this->render('comments/edit.html.twig', [
-            'comment' => $comment,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="comments_delete", methods={"POST"})
@@ -91,4 +83,5 @@ class CommentsController extends AbstractController
 
         return $this->redirectToRoute('comments_index');
     }
+
 }

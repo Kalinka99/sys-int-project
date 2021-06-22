@@ -26,7 +26,6 @@
                 <td>{{ comment.created ? comment.created|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('comments_show', {'id': comment.id}) }}">show</a>
-                    <a href="{{ path('comments_edit', {'id': comment.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +35,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('comments_new') }}">Create new</a>
 {% endblock %}

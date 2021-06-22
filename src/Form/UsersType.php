@@ -20,8 +20,8 @@ class UsersType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => false,
-                'first_options' => ['label' => 'Hasło'],
-                'second_options' => ['label' => 'Powtórz hasło'],
+                'first_options' => ['label' => ' '],
+                'second_options' => ['label' => ' '],
                 'invalid_message' => 'Hasła muszą być identyczne.',
             ]);
 

@@ -1,7 +1,14 @@
 {{ form_start(form) }}
+<style>
+    .noOutline{
+        outline: none;
+    }
+</style>
 <div style="margin-left: 44%">
     {{ form_label(form, 'Nazwa') }}
-    {{ form_widget(form.name) }}
+    {{ form_widget(form.name, { 'attr' : {
+        'class' : 'noOutline'
+    }}) }}
 </div>
     <button style="margin-top: 2%; margin-left: 50%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

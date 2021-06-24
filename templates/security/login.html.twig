@@ -10,11 +10,11 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h3 style="padding-left: 3%" class="h3 mb-3 font-weight-normal">Zaloguj się!</h3>
+    <h3 style="padding-left: 3%; color: purple" class="h3 mb-3 font-weight-normal">Zaloguj się!</h3>
     <label for="inputEmail">E-mail</label><br><br>
-    <input type="email" value="{{ last_username }}" placeholder="E-mail" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus><br><br>
+    <input style="outline: none" type="email" value="{{ last_username }}" placeholder="E-mail" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus><br><br>
     <label for="inputPassword">Hasło</label><br><br>
-    <input type="password" placeholder="Hasło" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required><br><br>
+    <input  style="outline: none" type="password" placeholder="Hasło" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required><br><br>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"

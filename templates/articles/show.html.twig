@@ -5,21 +5,26 @@
 {% block body %}
     <div id="artykuł">
         <h1>{{ article.title }}</h1>
-        <p>{{ article.created ? article.created|date('Y-m-d H:i:s') : '' }} Admin</p>
-        <p>{{ article.id }}</p>
+        <p>{{ article.created ? article.created|date('Y-m-d H:i') : '' }} Admin</p>
         <p>{{ article.mainText }}</p>
+        <div>
+            {% for tag in article.tags %}
+                <p style="color: purple; font-weight: bold">{{ tag.name }}</p>
+            {% endfor %}
+        </div>
     </div>
+
     {% if app.user %}
     <div style="display: block; margin-left: 40%;">
         <button><a href="{{ path('articles_index') }}">POWRÓT</a></button>
-        <button><a href="{{ path('articles_edit', {'id': article.id}) }}">EDYTUJ</a></button>
+        <button><a href="{{ path('articles_edit_1', {'id': article.id}) }}">EDYTUJ</a></button>
         {{ include('articles/_delete_form.html.twig') }}
     </div>
     {% endif %}
     <div id="comments">
         <h3 style="color: purple; font-size: 20px; margin-left: 44%">Komentarze</h3>
             {% for comment in article.getComments() %}
-                <div style="margin-left: 15%; margin-right: 15%" id="singlecomment">
+                <div style="margin-left: 5%; margin-right: 5%" id="singlecomment">
                     <h3>{{ comment.authorUsername }}</h3>
                     <p>{{ comment.created|date('Y/m/d h:i') }}</p>
                     <p>{{ comment.mainText }}</p><br>

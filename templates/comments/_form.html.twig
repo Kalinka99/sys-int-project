@@ -1,17 +1,26 @@
 {{ form_start(form) }}
+<style>
+    .noOutline{
+        outline: none;
+    }
+</style>
 <div style="margin-left: 19%">
     <h3 style="color: purple">Dodaj komentarz</h3>
     <div style="margin-top: 1%">
         {{ form_label(form.authorUsername, 'Nick') }}
     </div>
     <div>
-        {{ form_widget(form.authorUsername) }}
+        {{ form_widget(form.authorUsername, { 'attr' : {
+            'class' : 'noOutline'
+        }}) }}
     </div>
     <div style="margin-top: 1%">
         {{ form_label(form.authorEmail, 'Email') }}
     </div>
     <div>
-        {{ form_widget(form.authorEmail) }}
+        {{ form_widget(form.authorEmail, { 'attr' : {
+            'class' : 'noOutline'
+        }}) }}
     </div>
     <div style="margin-top: 1%;">
         {{ form_label(form.mainText, 'Treść komentarza') }}
@@ -19,7 +28,8 @@
     <div>
         {{ form_widget(form.mainText, { 'attr' : {
             'rows' : '10',
-            'cols' : '50'
+            'cols' : '50',
+            'class' : 'noOutline'
         }}) }}
     </div>
 </div>

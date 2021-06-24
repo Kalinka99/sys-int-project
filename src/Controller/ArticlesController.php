@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Articles;
 use App\Entity\Categories;
 use App\Entity\Comments;
+use App\Entity\Tags;
 use App\Form\ArticlesType;
 use App\Form\CommentsType;
 use App\Repository\ArticlesRepository;
@@ -59,26 +60,6 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{page<\d+>?1}/{categoryId}", name="articles_by_category", methods={"GET"})
-     * @param int $page
-     * @param int $categoryId
-     * @return Response
-     */
-    public function articlesCategory(int $page, int $categoryId): Response
-    {
-
-        $category = $this->getDoctrine()->getRepository(Categories::class)->findOneById($categoryId);
-        $articles = $category->getArticles();
-        $articles = $this->paginator->paginate($articles, $page,    10);
-
-        return $this->render('articles/index.html.twig', [
-            'articles' => $articles,
-            'categories' => $this->getDoctrine()->getRepository(Categories::class)->findAll(),
-
-        ]);
-    }
-
 
     /**
      * @Route("/new", name="articles_new", methods={"GET","POST"})
@@ -87,8 +68,10 @@ class ArticlesController extends AbstractController
     {
         $doctrine = $this->getDoctrine();
         $categories = $doctrine->getRepository(Categories::class)->findAll();
+        $tags = $doctrine->getRepository(Tags::class)->findAll();
         $options = [
-            'categories' => $this->serializeCategories($categories)
+            'categories' => $this->serializeObject($categories),
+            'tags' => $this->serializeObject($tags),
         ];
 
         $form = $this->createForm(ArticlesType::class, null, $options);
@@ -116,46 +99,47 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/show/{id}", name="articles_show", methods={"GET"})
+     * @Route("/show/{id}", name="articles_show", methods={"GET", "POST"})
      */
     public function show(Articles $article, Request $request): Response
     {
         $doctrine = $this->getDoctrine();
-        $comment = new Comments();
-        $form = $this->createForm(CommentsType::class, $comment);
-        $form->handleRequest($request);
+        $form = $this->createForm(CommentsType::class);
+        if($request->getMethod()==='POST'){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $doctrine->getManager();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $doctrine->getManager();
+                $data = $form->getData();
+                $comment = (new Comments())
+                    ->setAuthorUsername($data['authorUsername'])
+                    ->setAuthorEmail($data['authorEmail'])
+                    ->setMainText($data['mainText'])
+                    ->setCreated(new \DateTime('now'))
+                    ->setArticles($article);
 
-            $data = $form->getData();
-            $comment = (new Comments())
-                ->setAuthorUsername($data['authorUsername'])
-                ->setAuthorEmail($data['authorEmail'])
-                ->setMainText($data['mainText'])
-                ->setCreated(new \DateTime('now'))
-                ->setArticles($this->getArticle());
-
-            $entityManager->persist($comment);
-            $entityManager->flush();
+                $entityManager->persist($comment);
+                $entityManager->flush();
+            }
         }
+
+
 
         return $this->render('articles/show.html.twig', [
             'article' => $article,
-            'comment' => $comment,
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="articles_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="articles_edit_1", methods={"GET","POST"})
      */
     public function edit(Request $request, Articles $article): Response
     {
         $doctrine = $this->getDoctrine();
         $categories = $doctrine->getRepository(Categories::class)->findAll();
         $options = [
-            'categories' => $this->serializeCategories($categories)
+            'categories' => $this->serializeObject($categories)
         ];
         $form = $this->createForm(ArticlesType::class, null, $options);
         $form->handleRequest($request);
@@ -179,6 +163,46 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * @Route("/by-category/{page<\d+>?1}/{categoryId}", name="articles_by_category", methods={"GET"})
+     * @param int $page
+     * @param int $categoryId
+     * @return Response
+     */
+    public function articlesCategory(int $page, int $categoryId): Response
+    {
+
+        $category = $this->getDoctrine()->getRepository(Categories::class)->findOneById($categoryId);
+        $articles = $category->getArticles();
+        $articles = $this->paginator->paginate($articles, $page,    10);
+
+        return $this->render('articles/index.html.twig', [
+            'articles' => $articles,
+            'categories' => $this->getDoctrine()->getRepository(Categories::class)->findAll(),
+
+        ]);
+    }
+
+    /**
+     * @Route("/by-tags/{page<\d+>?1}/{tagsId}", name="articles_by_tags", methods={"GET"})
+     * @param int $page
+     * @param int $tagId
+     * @return Response
+     */
+    public function articlesTags(int $page, int $tagId): Response
+    {
+
+        $tag = $this->getDoctrine()->getRepository(Tags::class)->findOneById($tagId);
+        $articles = $tag->getArticles();
+        $articles = $this->paginator->paginate($articles, $page, 10);
+
+        return $this->render('articles/index.html.twig', [
+            'articles' => $articles,
+            'tags' => $this->getDoctrine()->getRepository(Tags::class)->findAll(),
+
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="articles_delete", methods={"POST"})
      */
     public function delete(Request $request, Articles $article): Response
@@ -191,11 +215,10 @@ class ArticlesController extends AbstractController
 
         return $this->redirectToRoute('articles_index');
     }
-    private function serializeCategories($categories){
+    private function serializeObject($objects){
         $response = [];
-        /** @var Categories $category */
-        foreach ($categories as $category){
-            $response[$category->getName()] = $category->getId();
+        foreach ($objects as $object){
+            $response[$object->getName()] = $object->getId();
         }
         return $response;
     }

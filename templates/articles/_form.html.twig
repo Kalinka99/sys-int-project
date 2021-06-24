@@ -7,13 +7,19 @@
         margin-top: 1%;
         padding: 1%;
         border-radius: 20px;
+        outline: none;
+    }
+    .noOutline{
+        outline: none;
     }
 </style>
 <div style="margin-left: 5%">
     {{ form_label(form.title, 'Tytuł') }}
 </div>
 <div style="margin-left: 5%">
-    {{ form_widget(form.title) }}
+    {{ form_widget(form.title, { 'attr' : {
+        'class' : 'noOutline'
+    }}) }}
 </div>
 <div style="margin-left: 5%; margin-top: 1%">
     {{ form_label(form.mainText, 'Tekst artykułu') }}
@@ -21,7 +27,9 @@
 <div style="margin-left: 5%;">
     {{ form_widget(form.mainText, { 'attr': {
         'rows' : '15',
-        'cols' : '100' }}) }}
+        'cols' : '100',
+        'class' : 'noOutline'
+    }}) }}
 </div>
 <div style="margin-left: 5%; margin-top: 1%">
     {{ form_label(form.categories, 'Wybierz kategorię:') }}
@@ -31,6 +39,9 @@
         'class' : 'choice'
     }}) }}
 </div>
-
-    <button style="margin-left: 5%; margin-top: 1%; margin-bottom: 3%" class="btn">{{ button_label|default('DODAJ') }}</button>
+<div style="margin-left: 5%;">
+    {{ form_label(form.tags, 'Dodaj tagi:') }}
+    {{ form_widget(form.tags)}}
+</div>
+    <button style="margin-left: 5%;  margin-top: 1%; margin-bottom: 0.3%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

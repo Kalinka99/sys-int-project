@@ -51,9 +51,15 @@ class Articles
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Tags::class, inversedBy="articles")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +160,30 @@ class Articles
     {
         // TODO: Implement __toString() method.
         return Articles::class;
+    }
+
+    /**
+     * @return Collection|Tags[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tags $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tags $tag): self
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
     }
 
 }

@@ -7,6 +7,9 @@
     .form_password{
         margin-left: 45%;
     }
+     .noOutline{
+         outline: none;
+     }
 </style>
 <h3 style="margin-top: 8%; color: purple; margin-left: 47%">Edytuj dane</h3>
 <div class="form_group">
@@ -14,7 +17,14 @@
         {{ form_label(form.email) }}
     </div>
     <div class="form_wigdet">
-        {{ form_widget(form.email,{'value':email}) }}
+        {{ form_widget(form.email, {
+            'value' : email,
+            'attr' : {
+                'class' : 'noOutline'
+            }
+        }) }}
+
+
     </div>
     <div class="form_error">
         {{ form_errors(form.email) }}
@@ -22,7 +32,9 @@
 </div>
 <div class="form_password">
     {{ form_label(form.password, 'Nowe hasło') }}
-    {{ form_widget(form.password) }}
+    {{ form_widget(form.password, { 'attr' : {
+        'class' : 'noOutline'
+    }}) }}
 </div>
     <button style="margin-left: 48.5%; margin-top: 2%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
 {{ form_end(form) }}

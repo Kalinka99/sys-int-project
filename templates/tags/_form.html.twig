@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<style>
+    .form{
+        margin-left: 42%;
+        outline: none;
+    }
+    .nodisplay{
+        display: none;
+    }
+    .noOutline{
+        outline: none;
+    }
+</style>
+<div class="form">
+    {{ form_label(form.name, 'Nazwa') }}
+    {{ form_widget(form.name, { 'attr' : {
+        'class' : 'noOutline'
+    }
+
+    }) }}
+    {{ form_widget(form.articles, { 'attr' :{
+        'class' : 'nodisplay'
+    }})}}
+    <button class="btn">{{ button_label|default('ZAPISZ') }}</button>
+</div>
+
+{{ form_end(form) }}

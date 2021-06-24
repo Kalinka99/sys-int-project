@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista tagów{% endblock %}
+
+{% block body %}
+
+    <button style="margin-left: 46%; margin-top: 8%">
+        <a href="{{ path('tags_new') }}">STWÓRZ NOWY</a>
+    </button>
+    <table style="margin-top: 2%; margin-bottom: 3%" class="table">
+        <thead>
+            <tr>
+                <th>NAZWA</th>
+                <th>AKCJE</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tag in tags %}
+            <tr>
+                <td>{{ tag.name }}</td>
+                <td>
+                    <button class="readButton">
+                        <a href="{{ path('tags_show', {'id': tag.id}) }}">ZOBACZ</a>
+                    </button>
+                    <button class="editButton">
+                        <a href="{{ path('tags_edit', {'id': tag.id}) }}">EDYTUJ</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Nie znaleziono tagów</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

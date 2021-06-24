@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Articles{% endblock %}
+{% block title %}Edytuj artykuł{% endblock %}
 
 {% block body %}
-    <h1>Edit Articles</h1>
+    <h3 style="color: purple; margin-left: 5%; margin-top: 8%">Edytuj artykuł</h3>
+    <div>
+        {{ include('articles/_form.html.twig', {'button_label': 'ZAPISZ'}) }}
+    </div>
+    <div>
+        {{ include('articles/_delete_form.html.twig') }}
+    </div>
 
-    {{ include('articles/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('articles_index') }}">back to list</a>
-
-    {{ include('articles/_delete_form.html.twig') }}
 {% endblock %}

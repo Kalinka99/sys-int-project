@@ -46,7 +46,14 @@ class ArticlesType extends AbstractType
 
             ])
             ->add('categories', ChoiceType::class, [
-                'choices'  => $options['categories']
+                'choices'  => $options['categories'],
+                'required' => true,
+            ])
+            ->add('tags', ChoiceType::class, [
+                'choices' => $options['tags'],
+                'multiple' => true,
+                'required' => false,
+
             ])
         ;
     }
@@ -54,7 +61,8 @@ class ArticlesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'categories' => []
+            'categories' => [],
+            'tags' => [],
         ]);
     }
 }

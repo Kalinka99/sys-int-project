@@ -9,13 +9,14 @@
         {% endfor %}
         </div>
     {% if app.user %}
-    <button style="margin: 0 0 0 37%;"><a href="{{ path('categories_index') }}">EDYTUJ KATEGORIE</a></button>
+    <button style="margin: 0 0 0 33%;"><a href="{{ path('categories_index') }}">EDYTUJ KATEGORIE</a></button>
     <button><a href="{{ path('articles_new') }}">UTWÓRZ NOWY ARTYKUŁ</a></button>
+    <button><a href="{{ path('tags_index') }}">EDYTUJ TAGI</a></button>
     {% endif %}
     {% if app.user %}
     <table style="margin-top: 1%;" class="table">
     {% else %}
-    <table style="margin-top: 5%;" class="table">
+    <table style="margin-top: 1%;" class="table">
      {% endif %}
         <thead>
             <tr>
@@ -29,14 +30,14 @@
         <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.created ? article.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.created ? article.created|date('d.m.Y H:i') : '' }}</td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.getUsers().getEmail() }}</td>
                 <td>{{ article.getCategories().getName() }}</td>
                 <td>
                    <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">ZOBACZ</a></button>
                     {% if app.user %}
-                   <button class="editButton"><a href="{{ path('articles_edit', {'id': article.id}) }}">EDYTUJ</a></button>
+                   <button class="editButton"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">EDYTUJ</a></button>
                     {% endif %}
                 </td>
             </tr>

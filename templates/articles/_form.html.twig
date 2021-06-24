@@ -12,6 +12,10 @@
     .noOutline{
         outline: none;
     }
+    .tag_label{
+        margin-bottom: 1%;
+        margin-top: 1%;
+    }
 </style>
 <div style="margin-left: 5%">
     {{ form_label(form.title, 'Tytuł') }}
@@ -39,9 +43,33 @@
         'class' : 'choice'
     }}) }}
 </div>
-<div style="margin-left: 5%;">
-    {{ form_label(form.tags, 'Dodaj tagi:') }}
-    {{ form_widget(form.tags)}}
+
+<div style="margin-left: 5%">
+    <div class="tag_label">
+        {{ form_label(form.tags, 'Dodaj tagi:') }}
+    </div>
+    <div class="tag_choice">
+        {{ form_widget(form.tags, { 'attr' : {
+            'class' : 'choice'
+        }}) }}
+    </div>
+    <div class="tag_label">
+        {{ form_label(form.tags, 'Dodaj tagi:') }}
+    </div>
+    <div class="tag_choice">
+        {{ form_widget(form.tags, { 'attr' : {
+            'class' : 'choice'
+        }}) }}
+    </div>
+    <div class="tag_label">
+        {{ form_label(form.tags, 'Dodaj tagi:') }}
+    </div>
+    <div class="tag_choice">
+        {{ form_widget(form.tags, { 'attr' : {
+            'class' : 'choice'
+        }}) }}
+    </div>
 </div>
+
     <button style="margin-left: 5%;  margin-top: 1%; margin-bottom: 0.3%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

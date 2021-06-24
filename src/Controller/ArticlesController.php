@@ -183,32 +183,26 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/by-tags/{page<\d+>?1}/{tagsId}", name="articles_by_tags", methods={"GET"})
-     * @param int $page
-     * @param int $tagId
-     * @return Response
-     */
-    public function articlesTags(int $page, int $tagId): Response
-    {
-
-        $tag = $this->getDoctrine()->getRepository(Tags::class)->findOneById($tagId);
-        $articles = $tag->getArticles();
-        $articles = $this->paginator->paginate($articles, $page, 10);
-
-        return $this->render('articles/index.html.twig', [
-            'articles' => $articles,
-            'tags' => $this->getDoctrine()->getRepository(Tags::class)->findAll(),
-
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="articles_delete", methods={"POST"})
      */
     public function delete(Request $request, Articles $article): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $article->setUsers(null);
+            $article->setCategories(null);
+            if(!empty($article->getComments() )){
+                foreach ($article->getComments() as $comment){
+                    $article->removeComment($comment);
+                    $entityManager->remove($comment);
+                }
+            }
+            if(!empty($article->getTags() )){
+                foreach ($article->getTags() as $tag){
+                    $article->removeTag($tag);
+                }
+            }
+
             $entityManager->remove($article);
             $entityManager->flush();
         }

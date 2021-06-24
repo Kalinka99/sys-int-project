@@ -41,6 +41,16 @@ class Users implements UserInterface
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $about;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $contact;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -70,7 +80,7 @@ class Users implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -153,6 +163,31 @@ class Users implements UserInterface
                 $article->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+
+    public function getAbout(): ?string
+    {
+        return $this->about;
+    }
+
+    public function setAbout(string $about): self
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    public function getContact(): ?string
+    {
+        return $this->contact;
+    }
+
+    public function setContact(string $contact): self
+    {
+        $this->contact = $contact;
 
         return $this;
     }

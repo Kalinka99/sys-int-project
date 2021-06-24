@@ -4,6 +4,21 @@
         margin-left: 45%;
         margin-bottom: 2%;
     }
+    .formAbout{
+        margin-left: 25%;
+        margin-bottom: 2%;
+    }
+    .formAboutLabel{
+        margin-left: 25%;
+        margin-top: 3%;
+    }
+    .formContactLabel{
+        margin-left: 25%;
+    }
+    .formContact{
+        margin-left: 25%;
+        margin-bottom: 2%;
+    }
     .form_password{
         margin-left: 45%;
     }
@@ -23,8 +38,6 @@
                 'class' : 'noOutline'
             }
         }) }}
-
-
     </div>
     <div class="form_error">
         {{ form_errors(form.email) }}
@@ -35,6 +48,29 @@
     {{ form_widget(form.password, { 'attr' : {
         'class' : 'noOutline'
     }}) }}
+</div>
+<div class="formAboutLabel">
+    {{ form_label(form.about, 'O mnie') }}
+</div>
+<div class="formAbout">
+    {{ form_widget(form.about, { 'attr' : {
+        'class' : 'noOutline',
+        'rows' : '10',
+        'cols' : '100'
+    }
+    }) }}
+</div>
+
+<div class="formContactLabel">
+    {{ form_label(form.contact, 'Kontakt') }}
+</div>
+<div class="formContact">
+    {{ form_widget(form.contact, { 'attr' : {
+        'class' : 'noOutline',
+        'rows' : '10',
+        'cols' : '100'
+    }
+    }) }}
 </div>
     <button style="margin-left: 48.5%; margin-top: 2%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
 {{ form_end(form) }}

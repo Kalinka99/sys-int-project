@@ -2,15 +2,11 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticlesRepository;
+use App\Entity\Categories;
+use App\Entity\Users;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Articles as Article;
-use App\Entity\Categories as Category;
-use App\Entity\Comments as Comment;
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class MainController extends AbstractController
@@ -32,8 +28,12 @@ class MainController extends AbstractController
      */
     public function about(): Response
     {
+        $doctrine = $this->getDoctrine();
+        $users = $doctrine->getRepository(Users::class)->findAll();
         return $this->render(
-            'main/about.html.twig');
+            'main/about.html.twig', [
+                'users' => $users
+        ]);
     }
     /** @Route(
      *     "/contact",
@@ -42,25 +42,13 @@ class MainController extends AbstractController
      */
     public function contact(): Response
     {
+        $doctrine = $this->getDoctrine();
+        $users = $doctrine->getRepository(Users::class)->findAll();
         return $this->render(
-            'main/contact.html.twig');
-    }
-    /** @Route(
-     *     "/read", name="read"
-     * )
-     */
-    public function read(): Response
-    {
-        /** @var Article[] $articles */
-        /** @var Comment[] $comments */
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
-        $comments = $this->getDoctrine()->getRepository(Comment::class)->findAll();
-        return $this->render('main/read.html.twig', [
-            'articles' => $articles,
-            'comments'=>$comments
+            'main/contact.html.twig', [
+                'users' => $users
         ]);
     }
-
 }
 
 

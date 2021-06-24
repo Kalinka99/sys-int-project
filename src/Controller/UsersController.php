@@ -34,15 +34,21 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (!empty($form->getData()['password'])) {
                 $user->setPassword(password_hash($form->getData()['password'], PASSWORD_BCRYPT));
             }
 
-            if (strcmp($form->getData()['email'], $user->getEmail()) !== 0){
+            if (!is_null($form->getData()['email']) && strcmp($form->getData()['email'], $user->getEmail()) !== 0){
                 $user->setEmail($form->getData()['email']);
             }
 
+            if (!is_null($form->getData()['about']) && strcmp($form->getData()['about'], $user->getAbout()) !== 0){
+                $user->setAbout($form->getData()['about']);
+            }
+
+            if (!is_null($form->getData()['contact']) && strcmp($form->getData()['contact'], $user->getContact()) !== 0){
+                $user->setContact($form->getData()['contact']);
+            }
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('users_index');

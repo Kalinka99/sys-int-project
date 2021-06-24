@@ -51,9 +51,7 @@ class ArticlesType extends AbstractType
             ])
             ->add('tags', ChoiceType::class, [
                 'choices' => $options['tags'],
-                'multiple' => true,
                 'required' => false,
-
             ])
         ;
     }

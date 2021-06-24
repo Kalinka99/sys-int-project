@@ -94,6 +94,25 @@ class CategoriesController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            if(!empty($category->getArticles())){
+                foreach ($category->getArticles() as $article){
+                    $article->setUsers(null);
+                    $article->setCategories(null);
+                    if(!empty($article->getComments() )){
+                        foreach ($article->getComments() as $comment){
+                            $article->removeComment($comment);
+                            $entityManager->remove($comment);
+                        }
+                    }
+                    if(!empty($article->getTags() )){
+                        foreach ($article->getTags() as $tag){
+                            $article->removeTag($tag);
+                        }
+                    }
+
+                    $entityManager->remove($article);
+                }
+            }
             $entityManager->remove($category);
             $entityManager->flush();
         }

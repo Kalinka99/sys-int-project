@@ -1,4 +1,6 @@
-{{ form_start(form) }}
+{% set error_replace = {'<ul>': '', '</ul>': '', '<li>': '<p>', '</li>': '</p>', '{{': '<b>', '}}': '</b>'} %}
+
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
 <style>
     .form{
         margin-left: 42%;
@@ -10,19 +12,25 @@
     .noOutline{
         outline: none;
     }
+    .form_error{
+        margin-left: 7%;
+    }
 </style>
 <div class="form">
     {{ form_label(form.name, 'Nazwa') }}
     {{ form_widget(form.name, {
         'attr' : {
-        'class' : 'noOutline'
-    }
-
+        'class' : 'noOutline'}
     }) }}
-    {{ form_widget(form.articles, { 'attr' :{
+
+    {{ form_widget(form.articles, {
+        'attr' :{
         'class' : 'nodisplay'
     }})}}
-    <button class="btn">{{ button_label|default('ZAPISZ') }}</button>
+    <div class="form_error">
+        {{ form_errors(form.name) | replace(error_replace) | raw }}
+    </div>
+    <button style="margin-left: 10%; margin-top: 2%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
 </div>
 
 {{ form_end(form) }}

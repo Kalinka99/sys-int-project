@@ -1,3 +1,4 @@
+{% set error_replace = {'<ul>': '', '</ul>': '', '<li>': '<p>', '</li>': '</p>', '{{': '<b>', '}}': '</b>'} %}
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 <style>
     .choice{
@@ -16,6 +17,9 @@
         margin-bottom: 1%;
         margin-top: 1%;
     }
+    .form_error{
+        margin-left: 5%;
+    }
 </style>
 <div style="margin-left: 5%">
     {{ form_label(form.title, 'Tytuł') }}
@@ -25,15 +29,23 @@
         'class' : 'noOutline'
     }}) }}
 </div>
+<div class="form_error">
+    {{ form_errors(form.title)  | replace(error_replace) | raw }}
+</div>
 <div style="margin-left: 5%; margin-top: 1%">
     {{ form_label(form.mainText, 'Tekst artykułu') }}
 </div>
-<div style="margin-left: 5%;">
-    {{ form_widget(form.mainText, { 'attr': {
+<div style="margin-left: 5%; margin-bottom: -2%">
+    {{ form_widget(form.mainText, {
+        'value' : mainText,
+        'attr': {
         'rows' : '15',
         'cols' : '100',
         'class' : 'noOutline'
     }}) }}
+</div>
+<div class="form_error">
+    {{ form_errors(form.mainText)  | replace(error_replace) | raw }}
 </div>
 <div style="margin-left: 5%; margin-top: 1%">
     {{ form_label(form.categories, 'Wybierz kategorię:') }}

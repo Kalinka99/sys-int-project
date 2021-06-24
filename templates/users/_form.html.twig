@@ -1,4 +1,6 @@
-{{ form_start(form) }}
+{% set error_replace = {'<ul>': '', '</ul>': '', '<li>': '<p>', '</li>': '</p>', '{{': '<b>', '}}': '</b>'} %}
+
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
 <style>
     .form_group{
         margin-left: 45%;
@@ -40,7 +42,7 @@
         }) }}
     </div>
     <div class="form_error">
-        {{ form_errors(form.email) }}
+        {{ form_errors(form.email) | replace(error_replace) | raw }}
     </div>
 </div>
 <div class="form_password">
@@ -72,5 +74,5 @@
     }
     }) }}
 </div>
-    <button style="margin-left: 48.5%; margin-top: 2%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
+    <button style="margin-left: 48.5%; margin-bottom: 3%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
 {{ form_end(form) }}

@@ -10,6 +10,7 @@
         <div>
             {% for tag in article.tags %}
                 <p style="color: purple; font-weight: bold">{{ tag.name }}</p>
+                <a  href="{{ path('articles_by_tags', { 'tagId':tag.id} )}}" style="color: purple; font-weight: bold">{{ tag.name }}</a>
             {% endfor %}
         </div>
     </div>
@@ -20,10 +21,10 @@
         {{ include('articles/_delete_form.html.twig') }}
     </div>
     {% endif %}
-    <div style="margin-bottom: 2%">
-        <h3 style="color: purple; font-size: 20px; margin-left: 15%">Komentarze</h3>
+    <div style="margin-bottom: 2%; margin-top: 2%">
+            <h3 style="margin-left: 20%; color: purple">Komentarze</h3>
             {% for comment in article.getComments() %}
-                <div style="border-bottom: 3px solid white; padding-bottom: 2%; margin-left: 15%; margin-right: 15%">
+                <div style="border-bottom: 3px solid white; padding-bottom: 2%; margin-left: 20%; margin-right: 20%">
                     <h3>{{ comment.authorUsername }}</h3>
                     <p>{{ comment.created|date('d.m.Y H:i') }}</p>
                     <p>{{ comment.mainText }}</p><br>

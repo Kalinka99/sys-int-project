@@ -13,5 +13,34 @@
             {{ include('tags/_delete_form.html.twig') }}
         </div>
     </div>
-
+    <table style="margin-top: 1%;" class="table">
+        <thead>
+        <tr>
+            <th>UTWORZONO</th>
+            <th>TYTUŁ</th>
+            <th>AUTOR</th>
+            <th>KATEGORIA</th>
+            <th>AKCJE</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.created ? article.created|date('d.m.Y H:i') : '' }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.getUsers().getEmail() }}</td>
+                <td>{{ article.getCategories().getName() }}</td>
+                <td>
+                    <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">ZOBACZ</a></button>
+                    {% if app.user %}
+                        <button class="editButton"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">EDYTUJ</a></button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Brak artykułów</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

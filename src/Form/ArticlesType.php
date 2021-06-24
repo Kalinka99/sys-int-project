@@ -52,8 +52,15 @@ class ArticlesType extends AbstractType
             ->add('tags', ChoiceType::class, [
                 'choices' => $options['tags'],
                 'required' => false,
-            ])
-        ;
+            ]);
+        if($options['removeTags']){
+            $builder
+                ->add('tags', ChoiceType::class, [
+                'choices' => $options['tagsToRemove'],
+                'required' => false,
+            ]);
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -61,6 +68,9 @@ class ArticlesType extends AbstractType
         $resolver->setDefaults([
             'categories' => [],
             'tags' => [],
+            'tagsToRemove' => [],
+            'removeTags' => false
+
         ]);
     }
 }

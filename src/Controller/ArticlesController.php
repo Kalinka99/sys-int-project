@@ -85,7 +85,8 @@ class ArticlesController extends AbstractController
                 ->setMainText($data['mainText'])
                 ->setCreated(new \DateTime('now'))
                 ->setCategories($doctrine->getRepository(Categories::class)->findOneById($data['categories']))
-                ->setUsers($this->getUser());
+                ->setUsers($this->getUser())
+                ->addTag($doctrine->getRepository(Tags::class)->findOneById($data['tags']));
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -139,7 +140,9 @@ class ArticlesController extends AbstractController
         $doctrine = $this->getDoctrine();
         $categories = $doctrine->getRepository(Categories::class)->findAll();
         $options = [
-            'categories' => $this->serializeObject($categories)
+            'categories' => $this->serializeObject($categories),
+            'removeTags' => true,
+            'tagsToRemove' => $this->serializeObject($article->getTags())
         ];
         $form = $this->createForm(ArticlesType::class, null, $options);
         $form->handleRequest($request);
@@ -151,6 +154,7 @@ class ArticlesController extends AbstractController
                 ->setTitle($data['title'])
                 ->setMainText($data['mainText'])
                 ->setCategories($doctrine->getRepository(Categories::class)->findOneById($data['categories']));
+//                ->addTag($doctrine->getRepository(Tags::class)->findOneById($data['tags']));
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -181,6 +185,29 @@ class ArticlesController extends AbstractController
 
         ]);
     }
+
+
+    /**
+     * @Route("/by-tag/{page<\d+>?1}/{tagId}", name="articles_by_tags", methods={"GET"})
+     * @param int $page
+     * @param int $tagId
+     * @return Response
+     */
+    public function articlesTag(int $page, int $tagId): Response
+    {
+
+        $tag = $this->getDoctrine()->getRepository(Tags::class)->findOneById($tagId);
+        $articles = $tag->getArticles();
+        $articles = $this->paginator->paginate($articles, $page,    10);
+
+        return $this->render('articles/index.html.twig', [
+            'articles' => $articles,
+            'tags' => $this->getDoctrine()->getRepository(Tags::class)->findAll(),
+            'categories' => $this->getDoctrine()->getRepository(Categories::class)->findAll()
+
+        ]);
+    }
+
 
     /**
      * @Route("/{id}", name="articles_delete", methods={"POST"})

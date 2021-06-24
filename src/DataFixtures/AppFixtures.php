@@ -14,30 +14,6 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $category = (new Category())
-            ->setName("Kategoria 1");
-        $manager->persist($category);
-
-        $category = (new Category())
-            ->setName("Kategoria 2");
-        $manager->persist($category);
-
-        $category = (new Category())
-            ->setName("Kategoria 3");
-        $manager->persist($category);
-
-        $tag = (new Tag())
-            ->setName("#tag1");
-        $manager->persist($tag);
-
-        $tag = (new Tag())
-            ->setName("#tag2");
-        $manager->persist($tag);
-
-        $tag = (new Tag())
-            ->setName("#tag3");
-        $manager->persist($tag);
-
         $user = (new User())
             ->setEmail("admin@admin.com")
             ->setPassword(password_hash("admin1234", PASSWORD_BCRYPT))
@@ -46,7 +22,11 @@ class AppFixtures extends Fixture
             ->setContact("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
         $manager->persist($user);
 
-        for($i=0; $i<50; ++$i) {
+        $category = (new Category())
+            ->setName("Kategoria 1");
+        $manager->persist($category);
+
+        for($i=0; $i<10; ++$i) {
             $article = (new Article())
                 ->setTitle("Tytuł artykułu")
                 ->setMainText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
@@ -56,18 +36,56 @@ class AppFixtures extends Fixture
             $manager->persist($article);
         }
 
-        for($i=0; $i<3; ++$i){
-            $comment = (new Comment())
-                ->setArticles($article)
-                ->setAuthorUsername("Anon")
-                ->setAuthorEmail("anon@example.com")
-                ->setMainText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
-                ->setCreated(new\DateTime("now"));
-            $manager->persist($comment);
-        }
+            $category = (new Category())
+                ->setName("Kategoria 2");
+            $manager->persist($category);
 
+            for ($i = 0; $i < 10; ++$i) {
+                $article = (new Article())
+                    ->setTitle("Tytuł artykułu")
+                    ->setMainText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+                    ->setCreated(new \DateTime("now"))
+                    ->setCategories($category)
+                    ->setUsers($user);
+                $manager->persist($article);
+            }
+                $category = (new Category())
+                    ->setName("Kategoria 3");
+                $manager->persist($category);
 
-        $manager->flush();
-    }
+                for ($i = 0; $i < 10; ++$i) {
+                    $article = (new Article())
+                        ->setTitle("Tytuł artykułu")
+                        ->setMainText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+                        ->setCreated(new \DateTime("now"))
+                        ->setCategories($category)
+                        ->setUsers($user);
+                    $manager->persist($article);
+                }
+                    $tag = (new Tag())
+                        ->setName("#tag1");
+                    $manager->persist($tag);
 
-}
+                    $tag = (new Tag())
+                        ->setName("#tag2");
+                    $manager->persist($tag);
+
+                    $tag = (new Tag())
+                        ->setName("#tag3");
+                    $manager->persist($tag);
+
+                    for ($i = 0; $i < 3; ++$i) {
+                        $comment = (new Comment())
+                            ->setArticles($article)
+                            ->setAuthorUsername("Anon")
+                            ->setAuthorEmail("anon@example.com")
+                            ->setMainText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+                            ->setCreated(new\DateTime("now"));
+                        $manager->persist($comment);
+                    }
+
+                    $manager->flush();
+                }
+
+            }
+

@@ -1,10 +1,13 @@
-{{ form_start(form) }}
+{% set error_replace = {'<ul>': '', '</ul>': '', '<li>': '<p>', '</li>': '</p>', '{{': '<b>', '}}': '</b>'} %}
+
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}
+) }}
 <style>
     .noOutline{
         outline: none;
     }
 </style>
-<div style="margin-left: 19%">
+<div style="margin-left: 20%">
     <h3 style="color: purple">Dodaj komentarz</h3>
     <div style="margin-top: 1%">
         {{ form_label(form.authorUsername, 'Nick') }}
@@ -14,6 +17,9 @@
             'class' : 'noOutline'
         }}) }}
     </div>
+    <div class="form-error">
+        {{ form_errors(form.authorUsername) | replace(error_replace) | raw }}
+    </div>
     <div style="margin-top: 1%">
         {{ form_label(form.authorEmail, 'Email') }}
     </div>
@@ -21,6 +27,9 @@
         {{ form_widget(form.authorEmail, { 'attr' : {
             'class' : 'noOutline'
         }}) }}
+    </div>
+    <div class="form-error">
+        {{ form_errors(form.authorEmail) | replace(error_replace) | raw }}
     </div>
     <div style="margin-top: 1%;">
         {{ form_label(form.mainText, 'Treść komentarza') }}
@@ -32,8 +41,11 @@
             'class' : 'noOutline'
         }}) }}
     </div>
+    <div class="form-error">
+        {{ form_errors(form.mainText) | replace(error_replace) | raw }}
+    </div>
 </div>
 
 
-    <button style="margin-left: 19%; margin-bottom: 3%" class="btn">{{ button_label|default('DODAJ') }}</button>
+    <button style="margin-left: 20%; margin-bottom: 3%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

@@ -33,7 +33,7 @@
             <td>
                 <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">ZOBACZ</a></button>
                 {% if app.user %}
-                    <button class="editButton"><a href="{{ path('articles_edit', {'id': article.id}) }}">EDYTUJ</a></button>
+                    <button class="editButton"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">EDYTUJ</a></button>
                 {% endif %}
             </td>
         </tr>

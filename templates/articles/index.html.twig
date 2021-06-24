@@ -13,11 +13,7 @@
     <button><a href="{{ path('articles_new') }}">UTWÓRZ NOWY ARTYKUŁ</a></button>
     <button><a href="{{ path('tags_index') }}">EDYTUJ TAGI</a></button>
     {% endif %}
-    {% if app.user %}
     <table style="margin-top: 1%;" class="table">
-    {% else %}
-    <table style="margin-top: 1%;" class="table">
-     {% endif %}
         <thead>
             <tr>
                 <th>UTWORZONO</th>
@@ -47,7 +43,6 @@
             </tr>
         {% endfor %}
     </table>
-    </tbody>
         <div class="nav text-center">
             <style>
                 .pagination {

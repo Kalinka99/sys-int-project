@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edytuj artykuł{% endblock %}
+{% block title %}{% trans into 'en' %}Edytuj artykuł {% endtrans %}{% endblock %}
+
+
 
 {% block body %}
-    <h3 style="color: purple; margin-left: 5%; margin-top: 8%">Edytuj artykuł</h3>
+    <h3 style="color: purple; margin-left: 5%; margin-top: 8%">{% trans into 'en' %}Edytuj artykuł {% endtrans %}</h3>
     <div>
         {{ include('articles/_form.html.twig', {'button_label': 'ZAPISZ'}) }}
     </div>

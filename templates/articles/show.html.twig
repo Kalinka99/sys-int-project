@@ -9,8 +9,7 @@
         <p>{{ article.mainText }}</p>
         <div>
             {% for tag in article.tags %}
-                <p style="color: purple; font-weight: bold">{{ tag.name }}</p>
-                <a  href="{{ path('articles_by_tags', { 'tagId':tag.id} )}}" style="color: purple; font-weight: bold">{{ tag.name }}</a>
+                <a  href="{{ path('articles_by_tags', { 'tagId':tag.id} )}}" style="color: purple;  text-decoration: none; font-weight: bold">{{ tag.name }}</a>
             {% endfor %}
         </div>
     </div>

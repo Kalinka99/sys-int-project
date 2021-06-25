@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{#{% block title %}{{ 'title_record_list'|trans }}{% endblock %}#}
 {% block title %}Witaj na moim blogu!{% endblock %}
 
 {% block body %}
@@ -9,18 +10,18 @@
         {% endfor %}
         </div>
     {% if app.user %}
-    <button style="margin: 0 0 0 33%;"><a href="{{ path('categories_index') }}">EDYTUJ KATEGORIE</a></button>
-    <button><a href="{{ path('articles_new') }}">UTWÓRZ NOWY ARTYKUŁ</a></button>
-    <button><a href="{{ path('tags_index') }}">EDYTUJ TAGI</a></button>
+    <button style="margin: 0 0 0 33%;"><a href="{{ path('categories_index') }}">{% trans into 'en' %}EDYTUJ KATEGORIE{% endtrans %}</a></button>
+    <button><a href="{{ path('articles_new') }}">{% trans into 'en' %}UTWÓRZ NOWY ARTYKUŁ{% endtrans %}</a></button>
+    <button><a href="{{ path('tags_index') }}">{% trans into 'en' %}EDYTUJ TAGI{% endtrans %}</a></button>
     {% endif %}
     <table style="margin-top: 1%;" class="table">
         <thead>
             <tr>
-                <th>UTWORZONO</th>
-                <th>TYTUŁ</th>
-                <th>AUTOR</th>
-                <th>KATEGORIA</th>
-                <th>AKCJE</th>
+                <th>{% trans into 'en' %}UTWORZONO{% endtrans %}</th>
+                <th>{% trans into 'en' %}TYTUŁ{% endtrans %}</th>
+                <th>{% trans into 'en' %}AUTOR{% endtrans %}</th>
+                <th>{% trans into 'en' %}KATEGORIA{% endtrans %}</th>
+                <th>{% trans into 'en' %}AKCJE{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>

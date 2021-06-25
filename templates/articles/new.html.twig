@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nowy artykuł{% endblock %}
+{% block title %}{% trans into 'en' %}Nowy artykuł{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h2 style="margin-top: 8%; color:purple; margin-left: 5%">Stwórz nowy artykuł</h2>
+    <h2 style="margin-top: 8%; color:purple; margin-left: 5%">{% trans into 'en' %}Stwórz nowy artykuł{% endtrans %}</h2>
 
     {{ include('articles/_form.html.twig') }}
 {% endblock %}

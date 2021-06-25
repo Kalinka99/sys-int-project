@@ -2,26 +2,27 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     {% block stylesheet %}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}"> {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 {% if app.user %}
-    <p id="login">Witaj, admin!   <a href="{{ path('users_index') }}">Edytuj dane </a><a href="{{ path('app_logout') }}">Wyloguj się</a></p>
+    <p id="login">{% trans into 'en' %}Witaj, admin! {% endtrans %} <a href="{{ path('users_index') }}">{% trans into 'en' %}Edytuj dane {% endtrans %} </a><a href="{{ path('app_logout') }}">{% trans into 'en' %}Wyloguj się {% endtrans %}</a></p>
 {% else %}
-    <p style="color: purple" id="login"><a href="{{ path('app_login') }}">Zaloguj się</a></p>
+    <p style="color: purple" id="login"><a href="{{ path('app_login') }}">{% trans into 'en' %}Zaloguj się{% endtrans %}</a></p>
 {% endif %}
 <div id="top">
     <h1 style="font-size: 300%">blog</h1>
     <ul id="nav">
-        <li><a href="{{ path('index') }}">Strona Główna</a></li>
-        <li><a href="{{ path('about') }}">O mnie</a></li>
-        <li><a href="{{ path('contact') }}">Kontakt</a></li>
+        <li><a href="{{ path('index') }}">{% trans into 'en' %}Strona Główna{% endtrans %}</a></li>
+        <li><a href="{{ path('about') }}">{% trans into 'en' %}O mnie{% endtrans %}</a></li>
+        <li><a href="{{ path('contact') }}">{% trans into 'en' %}Kontakt{% endtrans %}</a></li>
     </ul>
 </div>
 {% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+{% endblock %}
 </body>
 </html>

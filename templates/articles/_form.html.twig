@@ -37,7 +37,6 @@
 </div>
 <div style="margin-left: 5%; margin-bottom: -2%">
     {{ form_widget(form.mainText, {
-        'value' : mainText,
         'attr': {
         'rows' : '15',
         'cols' : '100',
@@ -66,6 +65,5 @@
         }}) }}
     </div>
 </div>
-
     <button style="margin-left: 5%;  margin-top: 1%; margin-bottom: 0.3%" class="btn">{{ button_label|default('DODAJ') }}</button>
 {{ form_end(form) }}

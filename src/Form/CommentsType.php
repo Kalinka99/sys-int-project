@@ -21,35 +21,21 @@ class CommentsType extends AbstractType
                     new NotBlank([
                         'message' => 'Uzupełnij to pole.'
                     ]),
-                    new Length([
-                        'min' => 1,
-                        'max' => 30
-                    ]),
                 ]
-
             ])
             ->add('authorEmail', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Uzupełnij to pole.'
                     ]),
-                    new Length([
-                        'min' => 1,
-                        'max' => 255
-                    ]),
                 ]
-
             ])
             ->add('mainText', TextareaType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Uzupełnij to pole.'
                     ]),
-                    new Length([
-                        'min' => 1,
-                    ]),
                 ]
-
             ]);
     }
 

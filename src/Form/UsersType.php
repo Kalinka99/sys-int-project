@@ -16,23 +16,15 @@ class UsersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class, [
-                'invalid_message' => 'Uwzględnij znak @ w adresie e-mail. '
-            ])
+            ->add('email', EmailType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'required' => false,
                 'first_options' => ['label' => ' '],
                 'second_options' => ['label' => ' '],
                 'invalid_message' => 'Hasła muszą być identyczne.',
             ])
-            ->add('about', TextareaType::class, [
-                'required' =>false
-                ])
-            ->add('contact', TextareaType::class, [
-                'required' =>false
-            ]);
-
+            ->add('about', TextareaType::class)
+            ->add('contact', TextareaType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

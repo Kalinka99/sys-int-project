@@ -22,11 +22,13 @@ class Articles
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Uzupełnij to pole.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Uzupełnij to pole.")
      */
     private $mainText;
 
@@ -44,6 +46,7 @@ class Articles
     /**
      * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $categories;
 

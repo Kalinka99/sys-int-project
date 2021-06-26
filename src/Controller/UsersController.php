@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Users;
 use App\Form\UsersType;
 use App\Repository\UsersRepository;
+use App\Service\ActionOnDbService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UsersController extends AbstractController
 {
+    private UsersRepository $usersRepository;
+
+    private ActionOnDbService $actionOnDb;
+
+    public function __construct
+    (
+        UsersRepository $usersRepository,
+        ActionOnDbService $actionOnDb
+    )
+    {
+        $this->usersRepository = $usersRepository;
+        $this->actionOnDb = $actionOnDb;
+    }
+
     /**
      * @Route("/", name="users_index", methods={"GET"})
      */
-    public function index(UsersRepository $usersRepository): Response
+    public function index(): Response
     {
+        $users = $this->usersRepository->findAll();
+
         return $this->render('users/index.html.twig', [
-            'users' => $usersRepository->findAll(),
+            'users' => $users
         ]);
     }
 
@@ -31,6 +48,7 @@ class UsersController extends AbstractController
     public function edit(Request $request, Users $user): Response
     {
         $form = $this->createForm(UsersType::class);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,8 +67,11 @@ class UsersController extends AbstractController
             if (!is_null($form->getData()['contact']) && strcmp($form->getData()['contact'], $user->getContact()) !== 0){
                 $user->setContact($form->getData()['contact']);
             }
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
+
+            $this->actionOnDb
+                ->addElement($user)
+                ->executeUpdateOnDatabase();
+
             return $this->redirectToRoute('users_index');
         }
 
@@ -61,3 +82,4 @@ class UsersController extends AbstractController
         ]);
     }
 }
+?>

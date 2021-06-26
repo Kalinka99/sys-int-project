@@ -5,26 +5,39 @@ namespace App\Controller;
 use App\Entity\Categories;
 use App\Form\CategoriesType;
 use App\Repository\CategoriesRepository;
+use App\Service\ActionOnDbService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
-
 
 /**
  * @Route("/categories")
  */
 class CategoriesController extends AbstractController
 {
+    private CategoriesRepository $categoriesRepository;
+    private ActionOnDbService $actionOnDb;
+
+    public function __construct
+    (
+        CategoriesRepository $categoriesRepository,
+        ActionOnDbService $actionOnDb
+    )
+    {
+        $this->categoriesRepository = $categoriesRepository;
+        $this->actionOnDb = $actionOnDb;
+    }
+
     /**
      * @Route("/", name="categories_index", methods={"GET"})
      */
-    public function index(CategoriesRepository $categoriesRepository): Response
+    public function index(): Response
     {
+        $categories = $this->categoriesRepository->findAll();
+
         return $this->render('categories/index.html.twig', [
-            'categories' => $categoriesRepository->findAll(),
+            'categories' => $categories,
         ]);
     }
 
@@ -37,10 +50,10 @@ class CategoriesController extends AbstractController
         $form = $this->createForm(CategoriesType::class, $category);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($category);
-            $entityManager->flush();
+        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+            $this->actionOnDb
+                ->addElement($category)
+                ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('categories_index');
         }
@@ -56,14 +69,21 @@ class CategoriesController extends AbstractController
      */
     public function show(Categories $category): Response
     {
-        $category = $this->getDoctrine()->getRepository(Categories::class)->findOneById($category);
-        $articles = $category->getArticles();
+        $category = $this->categoriesRepository->findOneById($category);
 
+        if (!$category) {
+            $articles = [];
+            $category = [];
+        } else {
+            $articles = $category->getArticles();
+        }
+
+        $allCategories = $this->categoriesRepository->findAll();
 
         return $this->render('categories/show.html.twig', [
             'articles' => $articles,
             'category' => $category,
-            'categories' => $this->getDoctrine()->getRepository(Categories::class)->findAll(),
+            'categories' => $allCategories,
         ]);
     }
 
@@ -75,8 +95,10 @@ class CategoriesController extends AbstractController
         $form = $this->createForm(CategoriesType::class, $category);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+            $this->actionOnDb
+                ->addElement($category)
+                ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('categories_index');
         }
@@ -93,30 +115,35 @@ class CategoriesController extends AbstractController
     public function delete(Request $request, Categories $category): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+
             if(!empty($category->getArticles())){
                 foreach ($category->getArticles() as $article){
                     $article->setUsers(null);
                     $article->setCategories(null);
+
                     if(!empty($article->getComments() )){
                         foreach ($article->getComments() as $comment){
                             $article->removeComment($comment);
-                            $entityManager->remove($comment);
+                            $this->actionOnDb->removeElement($comment);
                         }
                     }
+
                     if(!empty($article->getTags() )){
                         foreach ($article->getTags() as $tag){
                             $article->removeTag($tag);
                         }
                     }
 
-                    $entityManager->remove($article);
+                    $this->actionOnDb->removeElement($article);
                 }
             }
-            $entityManager->remove($category);
-            $entityManager->flush();
+
+            $this->actionOnDb
+                ->removeElement($category)
+                ->executeUpdateOnDatabase();
         }
 
         return $this->redirectToRoute('categories_index');
     }
 }
+?>

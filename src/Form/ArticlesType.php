@@ -2,18 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Articles;
-use PhpParser\Node\Stmt\Label;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
-
 
 class ArticlesType extends AbstractType
 {
@@ -25,7 +21,7 @@ class ArticlesType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Uzupełnij to pole.'
-                        ]),
+                    ]),
                     new Length([
                         'min' => 1,
                         'max' => 255
@@ -56,9 +52,9 @@ class ArticlesType extends AbstractType
         if($options['removeTags']){
             $builder
                 ->add('tags', ChoiceType::class, [
-                'choices' => $options['tagsToRemove'],
-                'required' => false,
-            ]);
+                    'choices' => $options['tagsToRemove'],
+                    'required' => false,
+                ]);
         }
 
     }
@@ -70,7 +66,6 @@ class ArticlesType extends AbstractType
             'tags' => [],
             'tagsToRemove' => [],
             'removeTags' => false
-
         ]);
     }
 }

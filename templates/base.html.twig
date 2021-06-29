@@ -9,16 +9,16 @@
 </head>
 <body>
 {% if app.user %}
-    <p id="login">{% trans into 'en' %}Witaj, admin! {% endtrans %} <a href="{{ path('users_index') }}">{% trans into 'en' %}Edytuj dane {% endtrans %} </a><a href="{{ path('app_logout') }}">{% trans into 'en' %}Wyloguj się {% endtrans %}</a></p>
+    <p id="login">{{ 'welcome_admin'|trans }} <a href="{{ path('users_index') }}">{{ 'edit_data'|trans }}</a><a href="{{ path('app_logout') }}">{{ 'logout'|trans }}</a></p>
 {% else %}
-    <p style="color: purple" id="login"><a href="{{ path('app_login') }}">{% trans into 'en' %}Zaloguj się{% endtrans %}</a></p>
+    <p style="color: purple" id="login"><a href="{{ path('app_login') }}">{{ 'login'|trans }}</a></p>
 {% endif %}
 <div id="top">
     <h1 style="font-size: 300%">blog</h1>
     <ul id="nav">
-        <li><a href="{{ path('index') }}">{% trans into 'en' %}Strona Główna{% endtrans %}</a></li>
-        <li><a href="{{ path('about') }}">{% trans into 'en' %}O mnie{% endtrans %}</a></li>
-        <li><a href="{{ path('contact') }}">{% trans into 'en' %}Kontakt{% endtrans %}</a></li>
+        <li><a href="{{ path('index') }}">{{ 'homepage'|trans }}</a></li>
+        <li><a href="{{ path('about') }}">{{ 'about'|trans }}</a></li>
+        <li><a href="{{ path('contact') }}">{{ 'contact'|trans }}</a></li>
     </ul>
 </div>
 {% block body %}{% endblock %}

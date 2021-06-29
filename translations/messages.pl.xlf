@@ -4,75 +4,75 @@
         <body>
             <trans-unit id="title_edit_article">
                 <source>title_edit_article</source>
-                <target>Edit article</target>
+                <target>Edytuj artykuł</target>
             </trans-unit>
             <trans-unit id="edit_article">
                 <source>edit_article</source>
-                <target>Edit article</target>
+                <target>Edytuj artykuł</target>
             </trans-unit>
             <trans-unit id="welcome_admin">
                 <source>welcome_admin</source>
-                <target>Hello, admin! </target>
+                <target>Witaj, admin! </target>
             </trans-unit>
             <trans-unit id="edit_data">
                 <source>edit_data</source>
-                <target>Edit data </target>
+                <target>Edytuj dane </target>
             </trans-unit>
             <trans-unit id="logout">
                 <source>logout</source>
-                <target>Logout </target>
+                <target>Wyloguj się </target>
             </trans-unit>
             <trans-unit id="login">
                 <source>login</source>
-                <target>Login </target>
+                <target>Zaloguj się </target>
             </trans-unit>
             <trans-unit id="homepage">
                 <source>homepage</source>
-                <target>Homepage </target>
+                <target>Strona Główna </target>
             </trans-unit>
             <trans-unit id="about">
                 <source>about</source>
-                <target>About </target>
+                <target>O mnie</target>
             </trans-unit>
             <trans-unit id="contact">
                 <source>contact</source>
-                <target>Contact</target>
+                <target>Kontakt</target>
             </trans-unit>
             <trans-unit id="title">
                 <source>title</source>
-                <target>Welcome to my blog!</target>
+                <target>Witaj na moim blogu!</target>
             </trans-unit>
             <trans-unit id="categories_button">
                 <source>categories_button</source>
-                <target>EDIT CATEGORIES</target>
+                <target>EDYTUJ KATEGORIE</target>
             </trans-unit>
             <trans-unit id="articles_button">
                 <source>articles_button</source>
-                <target>ADD NEW ARTICLE</target>
+                <target>DODAJ NOWY ARTYKUŁ</target>
             </trans-unit>
             <trans-unit id="tags_button">
                 <source>tags_button</source>
-                <target>EDIT TAGS</target>
+                <target>EDYTUJ TAGI</target>
             </trans-unit>
             <trans-unit id="created_label">
                 <source>created_label</source>
-                <target>CREATED</target>
+                <target>UTWORZONO</target>
             </trans-unit>
             <trans-unit id="title_label">
                 <source>title_label</source>
-                <target>TITLE</target>
+                <target>TYTUŁ</target>
             </trans-unit>
             <trans-unit id="author_label">
                 <source>author_label</source>
-                <target>AUTHOR</target>
+                <target>AUTOR</target>
             </trans-unit>
             <trans-unit id="category_label">
                 <source>category_label</source>
-                <target>CATEGORY</target>
+                <target>KATEGORIE</target>
             </trans-unit>
             <trans-unit id="actions_label">
                 <source>actions_label</source>
-                <target>ACTION</target>
+                <target>AKCJE</target>
             </trans-unit>
         </body>
     </file>

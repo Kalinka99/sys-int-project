@@ -74,6 +74,34 @@
                 <source>actions_label</source>
                 <target>AKCJE</target>
             </trans-unit>
+            <trans-unit id="login_title">
+                <source>login_title</source>
+                <target>Zaloguj się!</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>Hasło</target>
+            </trans-unit>
+            <trans-unit id="see_more_button">
+                <source>see_more_button</source>
+                <target>ZOBACZ</target>
+            </trans-unit>
+            <trans-unit id="edit_button">
+                <source>edit_button</source>
+                <target>EDYTUJ</target>
+            </trans-unit>
+            <trans-unit id="delete_button">
+                <source>delete_button</source>
+                <target>USUŃ</target>
+            </trans-unit>
+            <trans-unit id="add_button">
+                <source>add_button</source>
+                <target>DODAJ</target>
+            </trans-unit>
+            <trans-unit id="add_comment">
+                <source>add_comment</source>
+                <target>Dodaj komentarz</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

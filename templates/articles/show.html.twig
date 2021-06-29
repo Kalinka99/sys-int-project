@@ -6,7 +6,7 @@
     <div id="artykuł">
         <h1>{{ article.title }}</h1>
         <p>{{ article.created ? article.created|date('d.m.Y H:i') : '' }} Admin</p>
-        <p>{{ article.mainText }}</p>
+        <p style="text-align: justify">{{ article.mainText }}</p>
         <div>
             {% for tag in article.tags %}
                 <a  href="{{ path('articles_by_tags', { 'tagId':tag.id} )}}" style="color: purple;  text-decoration: none; font-weight: bold">{{ tag.name }}</a>
@@ -16,7 +16,7 @@
 
     {% if app.user %}
     <div style="display: block; margin-left: 40%;">
-        <button style="margin-left: 4%"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">EDYTUJ</a></button>
+        <button style="margin-left: 4%"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">{{ 'edit_button'|trans }}</a></button>
         {{ include('articles/_delete_form.html.twig') }}
     </div>
     {% endif %}

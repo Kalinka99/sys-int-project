@@ -24,7 +24,7 @@
             </trans-unit>
             <trans-unit id="login">
                 <source>login</source>
-                <target>Login </target>
+                <target>Log in </target>
             </trans-unit>
             <trans-unit id="homepage">
                 <source>homepage</source>
@@ -73,6 +73,34 @@
             <trans-unit id="actions_label">
                 <source>actions_label</source>
                 <target>ACTION</target>
+            </trans-unit>
+            <trans-unit id="login_title">
+                <source>login_title</source>
+                <target>Log in!</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="see_more_button">
+                <source>see_more_button</source>
+                <target>SEE MORE</target>
+            </trans-unit>
+            <trans-unit id="edit_button">
+                <source>edit_button</source>
+                <target>EDIT</target>
+            </trans-unit>
+            <trans-unit id="delete_button">
+                <source>delete_button</source>
+                <target>DELETE</target>
+            </trans-unit>
+            <trans-unit id="add_button">
+                <source>add_button</source>
+                <target>ADD</target>
+            </trans-unit>
+            <trans-unit id="add_comment">
+                <source>add_comment</source>
+                <target>Add a comment</target>
             </trans-unit>
         </body>
     </file>

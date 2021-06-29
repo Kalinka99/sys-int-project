@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('tags_delete', {'id': tag.id}) }}" onsubmit="return confirm('Czy na pewno chcę usunąć ten tag?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tag.id) }}">
-    <button style="margin-top: -4%; margin-left: -3%" class="btn">USUŃ</button>
+    <button style="margin-top: -4%; margin-left: -3%" class="btn">{{ 'delete_button'|trans }}</button>
 </form>
 

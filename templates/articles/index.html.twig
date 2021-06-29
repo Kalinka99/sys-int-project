@@ -31,9 +31,9 @@
                 <td>{{ article.getUsers().getEmail() }}</td>
                 <td>{{ article.getCategories().getName() }}</td>
                 <td>
-                   <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">ZOBACZ</a></button>
+                   <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">{{ 'see_more_button'|trans }}</a></button>
                     {% if app.user %}
-                   <button class="editButton"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">EDYTUJ</a></button>
+                   <button class="editButton"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">{{ 'edit_button'|trans }}</a></button>
                     {% endif %}
                 </td>
             </tr>

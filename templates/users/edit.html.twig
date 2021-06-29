@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edytuj dane{% endblock %}
+{% block title %}{{ "edit_data" | trans }}{% endblock %}
 
 {% block body %}
     {{ include('users/_form.html.twig', {'button_label': 'ZAPISZ'}) }}

@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-    {% block title %}
-        O mnie
-    {% endblock %}
+    {% block title %}{{ 'about' |trans }}{% endblock %}
     {% block body %}
         {% for user in users %}
         <p style="margin-top: 8%; margin-left: 5%; margin-right: 5%">{{ user.about}}</p>

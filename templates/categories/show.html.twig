@@ -6,7 +6,7 @@
 
     <h1 style="text-align: center; color: purple; margin-top: 8%">{{ category.name }}</h1>
     <button style="margin-left: 46%">
-        <a href="{{ path('categories_edit', {'id': category.id}) }}">ZMIEŃ NAZWĘ</a>
+        <a href="{{ path('categories_edit', {'id': category.id}) }}">{{ 'rename'|trans }}</a>
     </button>
     <div style="margin-left: 48%; margin-top: 1%">
         {{ include('categories/_delete_form.html.twig') }}
@@ -16,30 +16,30 @@
     <table style="margin-top: 5%;" class="table">
     <thead>
     <tr>
-        <th>UTWORZONO</th>
-        <th>TYTUŁ</th>
-        <th>AUTOR</th>
-        <th>KATEGORIA</th>
-        <th>AKCJE</th>
+        <th>{{ 'created_label'|trans }}</th>
+        <th>{{ 'title_label'|trans }}</th>
+        <th>{{ 'author_label'|trans }}</th>
+        <th>{{ 'category_label'|trans }}</th>
+        <th>{{ 'actions_label'|trans }}</th>
     </tr>
     </thead>
     <tbody>
     {% for article in articles %}
         <tr>
-            <td>{{ article.created ? article.created|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ article.created ? article.created|date('d/m/Y H:i') : '' }}</td>
             <td>{{ article.title }}</td>
             <td>{{ article.getUsers().getEmail() }}</td>
             <td>{{ article.getCategories().getName() }}</td>
             <td>
-                <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">ZOBACZ</a></button>
+                <button class="readButton"><a href="{{ path('articles_show', {'id': article.id}) }}">{{ 'see_more_button' | trans }}</a></button>
                 {% if app.user %}
-                    <button class="editButton"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">EDYTUJ</a></button>
+                    <button class="editButton"><a href="{{ path('articles_edit_1', {'id': article.id}) }}">{{ 'edit_button' | trans }}</a></button>
                 {% endif %}
             </td>
         </tr>
     {% else %}
         <tr>
-            <td colspan="5">Brak artykułów</td>
+            <td colspan="5">{{ 'no_records' | trans }}</td>
         </tr>
     {% endfor %}
 </table>

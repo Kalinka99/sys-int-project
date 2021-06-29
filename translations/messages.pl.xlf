@@ -98,9 +98,61 @@
                 <source>add_button</source>
                 <target>DODAJ</target>
             </trans-unit>
+            <trans-unit id="save_button">
+                <source>save_button</source>
+                <target>ZAPISZ</target>
+            </trans-unit>
             <trans-unit id="add_comment">
                 <source>add_comment</source>
                 <target>Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="comments">
+                <source>comments</source>
+                <target>Komentarze</target>
+            </trans-unit>
+            <trans-unit id="new_article">
+                <source>new_article</source>
+                <target>Stwórz nowy artykuł</target>
+            </trans-unit>
+            <trans-unit id="category_name_label">
+                <source>category_name_label</source>
+                <target>NAZWA KATEGORII</target>
+            </trans-unit>
+            <trans-unit id="create_new_category">
+                <source>create_new_category</source>
+                <target>STWÓRZ NOWĄ KATEGORIĘ</target>
+            </trans-unit>
+            <trans-unit id="create_new_tag">
+                <source>create_new_tag</source>
+                <target>STWÓRZ NOWY TAG</target>
+            </trans-unit>
+            <trans-unit id="create_new_tag_title">
+                <source>create_new_tag_title</source>
+                <target>Stwórz nowy tag</target>
+            </trans-unit>
+            <trans-unit id="rename">
+                <source>rename</source>
+                <target>ZMIEŃ NAZWĘ</target>
+            </trans-unit>
+            <trans-unit id="new_category">
+                <source>new_category</source>
+                <target>Stwórz nową kategorię</target>
+            </trans-unit>
+            <trans-unit id="category_list">
+                <source>category_list</source>
+                <target>Lista kategorii</target>
+            </trans-unit>
+            <trans-unit id="no_records">
+                <source>no_records</source>
+                <target>Brak rekordów</target>
+            </trans-unit>
+            <trans-unit id="tag_list">
+                <source>tag_list</source>
+                <target>Lista tagów</target>
+            </trans-unit>
+            <trans-unit id="name">
+                <source>name</source>
+                <target>NAZWA</target>
             </trans-unit>
         </body>
     </file>

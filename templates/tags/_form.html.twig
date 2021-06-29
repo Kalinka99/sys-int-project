@@ -30,6 +30,6 @@
     <div class="form_error">
         {{ form_errors(form.name) | replace(error_replace) | raw }}
     </div>
-    <button style="margin-left: 10%; margin-top: 2%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
+    <button style="margin-left: 10%; margin-top: 2%" class="btn">{{ 'save_button' |trans }}</button>
 </div>
 {{ form_end(form) }}

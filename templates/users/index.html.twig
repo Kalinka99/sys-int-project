@@ -6,8 +6,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>EMAIL</th>
-                <th>AKCJE</th>
+                <th>E-MAIL</th>
+                <th>{{ "actions_label" | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
                 <td>{{ user.email }}</td>
                 <td>
                     <button class="editButton">
-                        <a href="{{ path('users_edit', {'id': user.id}) }}">EDYTUJ DANE</a>
+                        <a href="{{ path('users_edit', {'id': user.id}) }}">{{ "edit_button" | trans }}</a>
                     </button>
                 </td>
             </tr>

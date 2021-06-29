@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lista kategorii{% endblock %}
+{% block title %}{{ 'category_list' |trans }}{% endblock %}
 
 {% block body %}
 
     <button style="margin: 8% 0 -20% 44%;">
-        <a href="{{ path('categories_new') }}">STWÓRZ NOWĄ KATEGORIĘ</a>
+        <a href="{{ path('categories_new') }}">{{ 'create_new_category'|trans }}</a>
     </button>
     <table style="margin-top: 2%; margin-bottom: 3%" class="table">
         <thead>
             <tr>
-                <th>NAZWA KATEGORII</th>
-                <th>AKCJE</th>
+                <th>{{ 'category_name_label'|trans }}</th>
+                <th>{{ 'actions_label'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -20,16 +20,16 @@
                 <td>{{ category.name }}</td>
                 <td>
                     <button class="readButton">
-                        <a href="{{ path('categories_show', {'id': category.id}) }}">ZOBACZ</a>
+                        <a href="{{ path('categories_show', {'id': category.id}) }}">{{ 'see_more_button'|trans }}</a>
                     </button>
                     <button class="editButton">
-                        <a href="{{ path('categories_edit', {'id': category.id}) }}">EDYTUJ</a>
+                        <a href="{{ path('categories_edit', {'id': category.id}) }}">{{ 'edit_button'|trans }}</a>
                     </button>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'no_records' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

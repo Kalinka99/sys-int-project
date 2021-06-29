@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dodaj nową kategorię{% endblock %}
+{% block title %}{{ 'new_category' |trans }}{% endblock %}
 
 {% block body %}
-    <h3 style="color:purple; margin-left: 44%; margin-top: 8%;">Stwórz nową kategorię</h3>
+    <h3 style="color:purple; margin-left: 44%; margin-top: 8%;">{{ 'new_category' |trans }}</h3>
     {{ include('categories/_form.html.twig') }}
 {% endblock %}

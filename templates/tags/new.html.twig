@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Stwórz nowy tag{% endblock %}
+{% block title %}{{ 'create_new_tag_title' | trans }}{% endblock %}
 
 {% block body %}
-    <h3 style="color: purple; margin-top: 8%; margin-left: 45%">Stwórz nowy tag</h3>
+    <h3 style="color: purple; margin-top: 8%; margin-left: 45%">{{ 'create_new_tag_title' | trans }}</h3>
 
     {{ include('tags/_form.html.twig') }}
 {% endblock %}

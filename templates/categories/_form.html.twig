@@ -18,5 +18,5 @@
 <div class="form_error">
     {{ form_errors(form.name) | replace(error_replace) | raw }}
 </div>
-    <button style="margin-top: 2%; margin-left: 50%" class="btn">{{ button_label|default('DODAJ') }}</button>
+    <button style="margin-top: 2%; margin-left: 50%" class="btn">{{ 'save_button' |trans }}</button>
 {{ form_end(form) }}

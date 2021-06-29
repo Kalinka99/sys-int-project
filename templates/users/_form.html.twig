@@ -28,7 +28,7 @@
          outline: none;
      }
 </style>
-<h3 style="margin-top: 8%; color: purple; margin-left: 47%">Edytuj dane</h3>
+<h3 style="margin-top: 8%; color: purple; margin-left: 47%">{{ "edit_data" | trans }}</h3>
 <div class="form_group">
     <div class="form_label">
         {{ form_label(form.email) }}
@@ -74,5 +74,5 @@
     }
     }) }}
 </div>
-    <button style="margin-left: 48.5%; margin-bottom: 3%" class="btn">{{ button_label|default('ZAPISZ') }}</button>
+    <button style="margin-left: 48.5%; margin-bottom: 3%" class="btn">{{ "save_button" | trans }}</button>
 {{ form_end(form) }}

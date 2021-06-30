@@ -10,6 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 
 class ArticlesType extends AbstractType
 {
@@ -20,7 +22,7 @@ class ArticlesType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Uzupełnij to pole.'
+                        'message' => 'not_blank'
                     ]),
                     new Length([
                         'min' => 1,
@@ -33,7 +35,7 @@ class ArticlesType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Uzupełnij to pole.'
+                        'message' => 'not_blank'
                     ]),
                     new Length([
                         'min' => 1,

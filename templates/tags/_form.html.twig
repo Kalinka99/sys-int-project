@@ -17,7 +17,7 @@
     }
 </style>
 <div class="form">
-    {{ form_label(form.name, 'Nazwa') }}
+    {{'form.name'|trans({})}}
     {{ form_widget(form.name, {
         'attr' : {
         'class' : 'noOutline'}

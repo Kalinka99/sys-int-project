@@ -21,7 +21,7 @@ class UsersType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => ['label' => ' '],
                 'second_options' => ['label' => ' '],
-                'invalid_message' => 'Hasła muszą być identyczne.',
+                'invalid_message' => 'passwords_match',
             ])
             ->add('about', TextareaType::class)
             ->add('contact', TextareaType::class);

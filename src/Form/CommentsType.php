@@ -19,21 +19,21 @@ class CommentsType extends AbstractType
             ->add('authorUsername', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Uzupełnij to pole.'
+                        'message' => 'not_blank'
                     ]),
                 ]
             ])
             ->add('authorEmail', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Uzupełnij to pole.'
+                        'message' => 'not_blank'
                     ]),
                 ]
             ])
             ->add('mainText', TextareaType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Uzupełnij to pole.'
+                        'message' => 'not_blank'
                     ]),
                 ]
             ]);

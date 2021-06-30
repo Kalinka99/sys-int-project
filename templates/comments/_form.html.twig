@@ -20,7 +20,7 @@
         {{ form_errors(form.authorUsername) | replace(error_replace) | raw }}
     </div>
     <div style="margin-top: 1%">
-        {{ form_label(form.authorEmail, 'E-mail') }}
+        {{'form.email'|trans({})}}
     </div>
     <div>
         {{ form_widget(form.authorEmail, { 'attr' : {

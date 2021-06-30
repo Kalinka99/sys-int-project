@@ -158,6 +158,31 @@
                 <source>not_blank</source>
                 <target>Uzupełnij to pole.</target>
             </trans-unit>
+            <trans-unit id="form.email">
+                <source>form.email</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="form.name">
+                <source>form.name</source>
+                <target>Nazwa</target>
+            </trans-unit>
+            <trans-unit id="form.title">
+                <source>form.title</source>
+                <target>Tytuł</target>
+            </trans-unit>
+            <trans-unit id="form.text">
+                <source>form.text</source>
+                <target>Treść</target>
+            </trans-unit>
+            <trans-unit id="form.choose.cat">
+                <source>form.choose.cat</source>
+                <target>Wybierz kategorię:</target>
+            </trans-unit>
+            <trans-unit id="form.choose.tag">
+                <source>form.choose.tag</source>
+                <target>Wybierz tag:</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

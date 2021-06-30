@@ -22,7 +22,7 @@
     }
 </style>
 <div style="margin-left: 5%">
-    {{ form_label(form.title, 'Tytuł') }}
+    {{'form.title'|trans({})}}
 </div>
 <div style="margin-left: 5%">
     {{ form_widget(form.title, { 'attr' : {
@@ -33,7 +33,7 @@
     {{ form_errors(form.title)  | replace(error_replace) | raw }}
 </div>
 <div style="margin-left: 5%; margin-top: 1%">
-    {{ form_label(form.mainText, 'Tekst artykułu') }}
+    {{'form.text'|trans({})}}
 </div>
 <div style="margin-left: 5%; margin-bottom: -2%">
     {{ form_widget(form.mainText, {
@@ -47,7 +47,7 @@
     {{ form_errors(form.mainText)  | replace(error_replace) | raw }}
 </div>
 <div style="margin-left: 5%; margin-top: 1%">
-    {{ form_label(form.categories, 'Wybierz kategorię:') }}
+    {{'form.choose.cat'|trans({})}}
 </div>
 <div style="margin-left: 5%;">
     {{ form_widget(form.categories, { 'attr' : {
@@ -57,7 +57,7 @@
 
 <div style="margin-left: 5%">
     <div class="tag_label">
-        {{ form_label(form.tags, 'Dodaj tag:') }}
+        {{'form.choose.tag'|trans({})}}
     </div>
     <div class="tag_choice">
         {{ form_widget(form.tags, { 'attr' : {

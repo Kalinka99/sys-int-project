@@ -162,6 +162,10 @@
                 <source>name</source>
                 <target>NAME</target>
             </trans-unit>
+            <trans-unit id="not_blank">
+                <source>not_blank</source>
+                <target>This field should not be blank.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

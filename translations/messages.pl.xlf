@@ -154,6 +154,10 @@
                 <source>name</source>
                 <target>NAZWA</target>
             </trans-unit>
+            <trans-unit id="not_blank">
+                <source>not_blank</source>
+                <target>Uzupełnij to pole.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

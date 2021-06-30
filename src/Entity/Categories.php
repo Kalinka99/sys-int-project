@@ -22,7 +22,7 @@ class Categories
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Uzupełnij to pole.")
+     * @Assert\NotBlank(message="not_blank")
      */
     private $name;
 

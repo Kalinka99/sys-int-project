@@ -20,19 +20,19 @@ class Comments
 
     /**
      * @ORM\Column(type="string", length=30)
-     * @Assert\NotBlank(message="Uzupełnij to pole.")
+     * @Assert\NotBlank(message="not_blank")
      */
     private $authorUsername;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Uzupełnij to pole.")
+     * @Assert\NotBlank(message="not_blank")
      */
     private $authorEmail;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Uzupełnij to pole.")
+     * @Assert\NotBlank(message="not_blank")
      */
     private $mainText;
 

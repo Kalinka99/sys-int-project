@@ -23,12 +23,19 @@ class Articles
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 255,
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="not_blank")
+     * @Assert\Length(
+     *      min = 1,
+     * )
      */
     private $mainText;
 

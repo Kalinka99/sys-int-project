@@ -19,20 +19,31 @@ class Comments
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 255,
+     * )
      */
     private $authorUsername;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 255,
+     * )
      */
     private $authorEmail;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="not_blank")
+     * @Assert\Length(
+     *      min = 1,
+     * )
      */
     private $mainText;
 

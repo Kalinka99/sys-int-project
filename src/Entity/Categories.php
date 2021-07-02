@@ -23,6 +23,10 @@ class Categories
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 255,
+     * )
      */
     private $name;
 

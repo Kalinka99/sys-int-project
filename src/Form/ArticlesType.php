@@ -18,31 +18,8 @@ class ArticlesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'not_blank'
-                    ]),
-                    new Length([
-                        'min' => 1,
-                        'max' => 255
-                    ]),
-                ]
-
-            ])
-            ->add('mainText', TextareaType::class, [
-                'required' => true,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'not_blank'
-                    ]),
-                    new Length([
-                        'min' => 1,
-                    ]),
-                ]
-
-            ])
+            ->add('title', TextType::class)
+            ->add('mainText', TextareaType::class)
             ->add('categories', ChoiceType::class, [
                 'choices'  => $options['categories'],
                 'required' => true,
@@ -53,10 +30,7 @@ class ArticlesType extends AbstractType
             ]);
         if($options['removeTags']){
             $builder
-                ->add('tags', ChoiceType::class, [
-                    'choices' => $options['tagsToRemove'],
-                    'required' => false,
-                ]);
+                ->add('tags', ChoiceType::class);
         }
 
     }

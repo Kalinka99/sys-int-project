@@ -16,27 +16,9 @@ class CommentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('authorUsername', TextType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'not_blank'
-                    ]),
-                ]
-            ])
-            ->add('authorEmail', TextType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'not_blank'
-                    ]),
-                ]
-            ])
-            ->add('mainText', TextareaType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'not_blank'
-                    ]),
-                ]
-            ]);
+            ->add('authorUsername', TextType::class)
+            ->add('authorEmail', TextType::class)
+            ->add('mainText', TextareaType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

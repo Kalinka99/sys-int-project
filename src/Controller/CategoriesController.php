@@ -50,7 +50,7 @@ class CategoriesController extends AbstractController
         $form = $this->createForm(CategoriesType::class, $category);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->actionOnDb
                 ->addElement($category)
                 ->executeUpdateOnDatabase();
@@ -95,7 +95,7 @@ class CategoriesController extends AbstractController
         $form = $this->createForm(CategoriesType::class, $category);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->actionOnDb
                 ->addElement($category)
                 ->executeUpdateOnDatabase();

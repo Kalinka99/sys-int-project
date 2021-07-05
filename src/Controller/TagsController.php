@@ -50,7 +50,7 @@ class TagsController extends AbstractController
         $form = $this->createForm(TagsType::class, $tag);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $this->actionOnDb
                 ->addElement($tag)
@@ -84,7 +84,7 @@ class TagsController extends AbstractController
         $form = $this->createForm(TagsType::class, $tag);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $this->actionOnDb
                 ->addElement($tag)

@@ -78,7 +78,7 @@ class ArticlesController extends AbstractController
         $form = $this->createForm(ArticlesType::class, null, $options);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             $article = (new Articles())
@@ -109,7 +109,7 @@ class ArticlesController extends AbstractController
         $form = $this->createForm(CommentsType::class);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             $comment = (new Comments())
@@ -146,7 +146,7 @@ class ArticlesController extends AbstractController
         $form = $this->createForm(ArticlesType::class, null, $options);
         $form->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             $article

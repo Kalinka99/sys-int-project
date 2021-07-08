@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class ArticlesRepository
+ * @package App\Repository
  * @method Articles|null find($id, $lockMode = null, $lockVersion = null)
  * @method Articles|null findOneBy(array $criteria, array $orderBy = null)
  * @method Articles[]    findAll()
@@ -14,17 +16,19 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticlesRepository extends ServiceEntityRepository
 {
+    /**
+     * ArticlesRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Articles::class);
     }
     /**
      * Items per page.
-     *
      * Use constants to define configuration options that rarely change instead
      * of specifying them in app/config/config.yml.
      * See https://symfony.com/doc/current/best_practices.html#configuration
-     *
      * @constant int
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;

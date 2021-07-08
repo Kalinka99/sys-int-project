@@ -11,7 +11,10 @@ use LogicException;
 class SecurityController extends AbstractController
 {
     /**
+     * Login form.
      * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -25,6 +28,7 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * Logout route.
      * @Route("/logout", name="app_logout")
      * @throws LogicException
      */
@@ -33,4 +37,3 @@ class SecurityController extends AbstractController
         throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
-?>

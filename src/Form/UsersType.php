@@ -11,8 +11,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class UsersType
+ * @package App\Form
+ */
 class UsersType extends AbstractType
 {
+    /**
+     * Users form builder.
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -27,6 +36,10 @@ class UsersType extends AbstractType
             ->add('contact', TextareaType::class);
     }
 
+    /**
+     * Options resolver for users form.
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([]);

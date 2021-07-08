@@ -3,14 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
-use App\Entity\Categories;
 use App\Entity\Comments;
-use App\Entity\Tags;
 use App\Form\ArticlesType;
 use App\Form\CommentsType;
 use App\Repository\ArticlesRepository;
 use App\Repository\CategoriesRepository;
-use App\Repository\CommentsRepository;
 use App\Repository\TagsRepository;
 use App\Service\ActionOnDbService;
 use Knp\Component\Pager\PaginatorInterface;
@@ -21,16 +18,40 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/articles")
+ * Class ArticlesController
+ * @package App\Controller
  */
 class ArticlesController extends AbstractController
 {
-
+    /**
+     * @var ArticlesRepository
+     */
     private ArticlesRepository $articleRepository;
+    /**
+     * @var CategoriesRepository
+     */
     private CategoriesRepository $categoriesRepository;
+    /**
+     * @var TagsRepository
+     */
     private TagsRepository $tagsRepository;
+    /**
+     * @var PaginatorInterface
+     */
     private PaginatorInterface $paginator;
+    /**
+     * @var ActionOnDbService
+     */
     private ActionOnDbService $actionOnDb;
 
+    /**
+     * ArticlesController constructor.
+     * @param ArticlesRepository $articleRepository
+     * @param CategoriesRepository $categoriesRepository
+     * @param TagsRepository $tagsRepository
+     * @param PaginatorInterface $paginator
+     * @param ActionOnDbService $actionOnDb
+     */
     public function __construct
     (
         ArticlesRepository $articleRepository,
@@ -48,7 +69,10 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * Shows all articles with pagination of ten records per page.
      * @Route("/{page<\d+>?1}", name="articles_index", methods={"GET"})
+     * @param int $page
+     * @return Response
      */
     public function index(int $page): Response
     {
@@ -63,7 +87,10 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * Creating a new article.
      * @Route("/new", name="articles_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -102,7 +129,11 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * Shows an article with comments and comment form.
      * @Route("/show/{id}", name="articles_show", methods={"GET", "POST"})
+     * @param Articles $article
+     * @param Request $request
+     * @return Response
      */
     public function show(Articles $article, Request $request): Response
     {
@@ -131,7 +162,11 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * Editing an article.
      * @Route("/edit/{id}", name="articles_edit_1", methods={"GET","POST"})
+     * @param Request $request
+     * @param Articles $article
+     * @return Response
      */
     public function edit(Request $request, Articles $article): Response
     {
@@ -167,7 +202,11 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * Shows the list of articles by category.
      * @Route("/by-category/{page<\d+>?1}/{categoryId}", name="articles_by_category", methods={"GET"})
+     * @param int $page
+     * @param int $categoryId
+     * @return Response
      */
     public function articlesCategory(int $page, int $categoryId): Response
     {
@@ -183,7 +222,11 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * Shows the list of articles by tag.
      * @Route("/by-tag/{page<\d+>?1}/{tagId}", name="articles_by_tags", methods={"GET"})
+     * @param int $page
+     * @param int $tagId
+     * @return Response
      */
     public function articlesTag(int $page, int $tagId): Response
     {
@@ -202,7 +245,11 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * Deletes an article.
      * @Route("/{id}", name="articles_delete", methods={"POST"})
+     * @param Request $request
+     * @param Articles $article
+     * @return Response
      */
     public function delete(Request $request, Articles $article): Response
     {
@@ -229,6 +276,11 @@ class ArticlesController extends AbstractController
         return $this->redirectToRoute('articles_index');
     }
 
+    /**
+     * Serializes objects.
+     * @param $objects
+     * @return array
+     */
     private function serializeObject($objects): array
     {
         $response = [];

@@ -13,12 +13,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/tags")
+ * Class TagsController
+ * @package App\Controller
  */
 class TagsController extends AbstractController
 {
+    /**
+     * @var TagsRepository
+     */
     private TagsRepository $tagsRepository;
+    /**
+     * @var ActionOnDbService
+     */
     private ActionOnDbService $actionOnDb;
 
+    /**
+     * TagsController constructor.
+     * @param TagsRepository $tagsRepository
+     * @param ActionOnDbService $actionOnDb
+     */
     public function __construct
     (
         TagsRepository $tagsRepository,
@@ -30,7 +43,9 @@ class TagsController extends AbstractController
     }
 
     /**
+     * Shows a list of tags.
      * @Route("/", name="tags_index", methods={"GET"})
+     * @return Response
      */
     public function index(): Response
     {
@@ -42,7 +57,10 @@ class TagsController extends AbstractController
     }
 
     /**
+     * Creating a new tag.
      * @Route("/new", name="tags_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -66,7 +84,10 @@ class TagsController extends AbstractController
     }
 
     /**
+     * Shows a tag with a list of articles with this tag.
      * @Route("/{id}", name="tags_show", methods={"GET"})
+     * @param Tags $tag
+     * @return Response
      */
     public function show(Tags $tag): Response
     {
@@ -77,7 +98,11 @@ class TagsController extends AbstractController
     }
 
     /**
+     * Editing a tag.
      * @Route("/{id}/edit", name="tags_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Tags $tag
+     * @return Response
      */
     public function edit(Request $request, Tags $tag): Response
     {
@@ -100,7 +125,11 @@ class TagsController extends AbstractController
     }
 
     /**
+     * Deleting a tag.
      * @Route("/{id}", name="tags_delete", methods={"POST"})
+     * @param Request $request
+     * @param Tags $tag
+     * @return Response
      */
     public function delete(Request $request, Tags $tag): Response
     {

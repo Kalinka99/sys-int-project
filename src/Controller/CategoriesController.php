@@ -12,13 +12,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ *
  * @Route("/categories")
+ * Class CategoriesController
+ * @package App\Controller
  */
 class CategoriesController extends AbstractController
 {
+    /**
+     * @var CategoriesRepository
+     */
     private CategoriesRepository $categoriesRepository;
+    /**
+     * @var ActionOnDbService
+     */
     private ActionOnDbService $actionOnDb;
 
+    /**
+     * CategoriesController constructor.
+     * @param CategoriesRepository $categoriesRepository
+     * @param ActionOnDbService $actionOnDb
+     */
     public function __construct
     (
         CategoriesRepository $categoriesRepository,
@@ -30,7 +44,9 @@ class CategoriesController extends AbstractController
     }
 
     /**
+     * Shows a list of categories.
      * @Route("/", name="categories_index", methods={"GET"})
+     * @return Response
      */
     public function index(): Response
     {
@@ -42,7 +58,10 @@ class CategoriesController extends AbstractController
     }
 
     /**
+     * New category form.
      * @Route("/new", name="categories_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -65,7 +84,10 @@ class CategoriesController extends AbstractController
     }
 
     /**
+     * Shows a category and a list of articles with this category.
      * @Route("/{id}", name="categories_show", methods={"GET"})
+     * @param Categories $category
+     * @return Response
      */
     public function show(Categories $category): Response
     {
@@ -88,7 +110,11 @@ class CategoriesController extends AbstractController
     }
 
     /**
+     * Editing the category - form.
      * @Route("/{id}/edit", name="categories_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Categories $category
+     * @return Response
      */
     public function edit(Request $request, Categories $category): Response
     {
@@ -110,7 +136,11 @@ class CategoriesController extends AbstractController
     }
 
     /**
+     * Deleting a category.
      * @Route("/{id}", name="categories_delete", methods={"POST"})
+     * @param Request $request
+     * @param Categories $category
+     * @return Response
      */
     public function delete(Request $request, Categories $category): Response
     {
@@ -146,4 +176,3 @@ class CategoriesController extends AbstractController
         return $this->redirectToRoute('categories_index');
     }
 }
-?>

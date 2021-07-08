@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class CategoriesRepository
+ * @package App\Repository
  * @method Categories|null find($id, $lockMode = null, $lockVersion = null)
  * @method Categories|null findOneBy(array $criteria, array $orderBy = null)
  * @method Categories[]    findAll()
@@ -14,6 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoriesRepository extends ServiceEntityRepository
 {
+    /**
+     * CategoriesRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Categories::class);

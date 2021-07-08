@@ -7,13 +7,20 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class TagsRepository
+ * @package App\Repository
  * @method Tags|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tags|null findOneBy(array $criteria, array $orderBy = null)
  * @method Tags[]    findAll()
  * @method Tags[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class TagsRepository extends ServiceEntityRepository
 {
+    /**
+     * TagsRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Tags::class);

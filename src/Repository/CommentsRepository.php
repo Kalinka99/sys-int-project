@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class CommentsRepository
+ * @package App\Repository
  * @method Comments|null find($id, $lockMode = null, $lockVersion = null)
  * @method Comments|null findOneBy(array $criteria, array $orderBy = null)
  * @method Comments[]    findAll()
@@ -14,6 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentsRepository extends ServiceEntityRepository
 {
+    /**
+     * CommentsRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comments::class);

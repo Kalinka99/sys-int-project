@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Tags
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -22,6 +23,7 @@ class Tags
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
      * @Assert\Length(
@@ -32,25 +34,42 @@ class Tags
     private $name;
 
     /**
+     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity=Articles::class, mappedBy="tags")
      */
     private $articles;
 
+    /**
+     * Tags constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
 
+    /**
+     * Gets id of a tag.
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Gets a tag name.
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Sets a tag name.
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -59,6 +78,7 @@ class Tags
     }
 
     /**
+     * Gets a collection of articles with a specific tag.
      * @return Collection|Articles[]
      */
     public function getArticles(): Collection
@@ -66,6 +86,11 @@ class Tags
         return $this->articles;
     }
 
+    /**
+     * Adds a tag to an article.
+     * @param Articles $article
+     * @return $this
+     */
     public function addArticle(Articles $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -76,6 +101,11 @@ class Tags
         return $this;
     }
 
+    /**
+     * Removes a tag from an article.
+     * @param Articles $article
+     * @return $this
+     */
     public function removeArticle(Articles $article): self
     {
         if ($this->articles->removeElement($article)) {

@@ -12,6 +12,10 @@ use App\Entity\Tags as Tag;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * Fills the database with fixtures data.
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $user = (new User())

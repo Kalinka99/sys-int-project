@@ -13,13 +13,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/users")
+ * Class UsersController
+ * @package App\Controller
  */
 class UsersController extends AbstractController
 {
+    /**
+     * @var UsersRepository
+     */
     private UsersRepository $usersRepository;
-
+    /**
+     * @var ActionOnDbService
+     */
     private ActionOnDbService $actionOnDb;
 
+    /**
+     * UsersController constructor.
+     * @param UsersRepository $usersRepository
+     * @param ActionOnDbService $actionOnDb
+     */
     public function __construct
     (
         UsersRepository $usersRepository,
@@ -31,7 +43,9 @@ class UsersController extends AbstractController
     }
 
     /**
+     * Shows a user.
      * @Route("/", name="users_index", methods={"GET"})
+     * @return Response
      */
     public function index(): Response
     {
@@ -43,7 +57,11 @@ class UsersController extends AbstractController
     }
 
     /**
+     * User editing form.
      * @Route("/{id}/edit", name="users_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Users $user
+     * @return Response
      */
     public function edit(Request $request, Users $user): Response
     {

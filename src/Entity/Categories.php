@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Categories
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,6 +22,7 @@ class Categories
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
      * @Assert\Length(
@@ -31,25 +33,42 @@ class Categories
     private $name;
 
     /**
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="categories")
      */
     private $articles;
 
+    /**
+     * Categories constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
 
+    /**
+     * Gets id of a category.
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Gets the name of a category.
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Sets the name of a category.
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -58,6 +77,7 @@ class Categories
     }
 
     /**
+     * Gets collection of articles.
      * @return Collection|Articles[]
      */
     public function getArticles(): Collection
@@ -65,6 +85,11 @@ class Categories
         return $this->articles;
     }
 
+    /**
+     * Adds a new article to the category.
+     * @param Articles $article
+     * @return $this
+     */
     public function addArticle(Articles $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -75,10 +100,14 @@ class Categories
         return $this;
     }
 
+    /**
+     * Sets category to null before removing an article.
+     * @param Articles $article
+     * @return $this
+     */
     public function removeArticle(Articles $article): self
     {
         if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
             if ($article->getCategories() === $this) {
                 $article->setCategories(null);
             }
@@ -87,6 +116,10 @@ class Categories
         return $this;
     }
 
+    /**
+     * Converts to string so that no error occurs.
+     * @return string
+     */
     public function __toString()
     {
         // TODO: Implement __toString() method.

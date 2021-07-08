@@ -20,14 +20,19 @@ class MainController extends AbstractController
     }
 
     /**
+     * Redirection to articles index page.
      * @Route("/", name="index")
+     * @return Response
      */
     public function index(): Response
     {
         return $this->redirectToRoute('articles_index');
     }
+
     /**
+     * "About" page.
      * @Route("/about", name="about")
+     * @return Response
      */
     public function about(): Response
     {
@@ -38,6 +43,7 @@ class MainController extends AbstractController
         ]);
     }
     /**
+     * "Contact" page.
      * @Route("/contact", name="contact")
      */
     public function contact(): Response
@@ -49,8 +55,6 @@ class MainController extends AbstractController
         ]);
     }
 }
-
-?>
 
 
 

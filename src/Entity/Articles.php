@@ -23,7 +23,7 @@ class Articles
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
      * @Assert\Length(
@@ -34,7 +34,7 @@ class Articles
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="not_blank")
      * @Assert\Length(
@@ -237,7 +237,6 @@ class Articles
     public function removeComment(Comments $comment): self
     {
         if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
             if ($comment->getArticles() === $this) {
                 $comment->setArticles(null);
             }

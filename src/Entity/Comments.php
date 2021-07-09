@@ -21,7 +21,7 @@ class Comments
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
      * @Assert\Length(
@@ -32,7 +32,7 @@ class Comments
     private $authorUsername;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="not_blank")
      * @Assert\Length(
@@ -43,7 +43,7 @@ class Comments
     private $authorEmail;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="not_blank")
      * @Assert\Length(

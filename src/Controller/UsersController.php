@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace App\Controller;
 
 use App\Entity\Users;
@@ -84,15 +83,15 @@ class UsersController extends AbstractController
                 $user->setPassword(password_hash($form->getData()['password'], PASSWORD_BCRYPT));
             }
 
-            if (!is_null($form->getData()['email']) && strcmp($form->getData()['email'], $user->getEmail()) !== 0){
+            if (!is_null($form->getData()['email']) && strcmp($form->getData()['email'], $user->getEmail()) !== 0) {
                 $user->setEmail($form->getData()['email']);
             }
 
-            if (!is_null($form->getData()['about']) && strcmp($form->getData()['about'], $user->getAbout()) !== 0){
+            if (!is_null($form->getData()['about']) && strcmp($form->getData()['about'], $user->getAbout()) !== 0) {
                 $user->setAbout($form->getData()['about']);
             }
 
-            if (!is_null($form->getData()['contact']) && strcmp($form->getData()['contact'], $user->getContact()) !== 0){
+            if (!is_null($form->getData()['contact']) && strcmp($form->getData()['contact'], $user->getContact()) !== 0) {
                 $user->setContact($form->getData()['contact']);
             }
 
@@ -110,4 +109,3 @@ class UsersController extends AbstractController
         ]);
     }
 }
-?>

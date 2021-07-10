@@ -156,19 +156,19 @@ class CategoriesController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
 
-            if(!empty($category->getArticles())){
+            if (!empty($category->getArticles())) {
                 foreach ($category->getArticles() as $article){
                     $article->setUsers(null);
                     $article->setCategories(null);
 
-                    if(!empty($article->getComments() )){
+                    if (!empty($article->getComments())) {
                         foreach ($article->getComments() as $comment){
                             $article->removeComment($comment);
                             $this->actionOnDb->removeElement($comment);
                         }
                     }
 
-                    if(!empty($article->getTags() )){
+                    if (!empty($article->getTags())) {
                         foreach ($article->getTags() as $tag){
                             $article->removeTag($tag);
                         }

@@ -17,10 +17,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class MainController
+ * @package App\Controller
+ */
 class MainController extends AbstractController
 {
+    /**
+     * @var UsersRepository
+     */
     private UsersRepository $usersRepository;
 
+    /**
+     * MainController constructor.
+     * @param UsersRepository $usersRepository
+     */
     public function __construct
     (
         UsersRepository $usersRepository
@@ -61,10 +72,7 @@ class MainController extends AbstractController
         $users = $this->usersRepository->findAll();
 
         return $this->render('main/contact.html.twig', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 }
-
-
-

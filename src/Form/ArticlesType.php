@@ -18,7 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * Class ArticlesType
@@ -44,11 +43,10 @@ class ArticlesType extends AbstractType
                 'choices' => $options['tags'],
                 'required' => false,
             ]);
-        if($options['removeTags']){
+        if ($options['removeTags']) {
             $builder
                 ->add('tags', ChoiceType::class);
         }
-
     }
 
     /**
@@ -61,7 +59,7 @@ class ArticlesType extends AbstractType
             'categories' => [],
             'tags' => [],
             'tagsToRemove' => [],
-            'removeTags' => false
+            'removeTags' => false,
         ]);
     }
 }

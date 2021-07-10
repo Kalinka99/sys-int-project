@@ -103,7 +103,7 @@ class TagsController extends AbstractController
     {
         return $this->render('tags/show.html.twig', [
             'tag' => $tag,
-            'articles' => $tag->getArticles()
+            'articles' => $tag->getArticles(),
         ]);
     }
 
@@ -152,4 +152,3 @@ class TagsController extends AbstractController
         return $this->redirectToRoute('tags_index');
     }
 }
-?>

@@ -64,5 +64,4 @@ class CommentsController extends AbstractController
             'id' => $articleId
         ]);
     }
-
 }

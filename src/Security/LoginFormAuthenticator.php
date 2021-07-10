@@ -72,6 +72,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
+     * Supporting method.
      * @param Request $request
      * @return bool
      */
@@ -82,6 +83,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
+     * Gets credentials.
      * @param Request $request
      * @return array|mixed
      */
@@ -101,6 +103,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
+     * Gets user.
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
      * @return object|UserInterface|null
@@ -122,6 +125,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
+     * Checks credentials.
      * @param mixed $credentials
      * @param UserInterface $user
      * @return bool
@@ -133,6 +137,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     * @param $credentials
+     * @return string|null
      */
     public function getPassword($credentials): ?string
     {
@@ -140,6 +146,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
+     * If Authentication is successful, logs in and redirects to index page.
      * @param Request $request
      * @param TokenInterface $token
      * @param string $providerKey
@@ -150,10 +157,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+
         return new RedirectResponse($this->urlGenerator->generate('index'));
     }
 
     /**
+     * Generates login route.
      * @return string
      */
     protected function getLoginUrl()

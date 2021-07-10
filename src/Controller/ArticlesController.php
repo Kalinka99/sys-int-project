@@ -281,7 +281,6 @@ class ArticlesController extends AbstractController
                 ->removeElement($article)
                 ->executeUpdateOnDatabase();
         }
-
         return $this->redirectToRoute('articles_index');
     }
 
@@ -293,11 +292,10 @@ class ArticlesController extends AbstractController
     private function serializeObject($objects): array
     {
         $response = [];
-
         foreach ($objects as $object){
             $response[$object->getName()] = $object->getId();
         }
-
         return $response;
     }
 }
+

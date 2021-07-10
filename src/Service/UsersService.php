@@ -9,38 +9,45 @@
  * file that was distributed with this source code.
  */
 
-
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-class ActionOnDbService
+/**
+ * Class UsersService.
+ */
+class UsersService
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private EntityManagerInterface $entityManager;
 
-    public function __construct(
-        EntityManagerInterface $entityManager
-    )
-    {
+    /**
+     * UsersService constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
     }
 
-    public function addElement($object): self
+    /**
+     * Edits the user.
+     * @param $user
+     * @return $this
+     */
+    public function editUser($user): self
     {
-        $this->entityManager->persist($object);
-
+        $this->entityManager->persist($user);
         return $this;
     }
 
-    public function removeElement($object): self
-    {
-        $this->entityManager->remove($object);
-
-        return $this;
-    }
-
+    /**
+     * Updates database.
+     */
     public function executeUpdateOnDatabase(): void
     {
         $this->entityManager->flush();
     }
 }
+

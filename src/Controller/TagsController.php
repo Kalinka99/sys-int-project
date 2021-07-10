@@ -15,7 +15,7 @@ namespace App\Controller;
 use App\Entity\Tags;
 use App\Form\TagsType;
 use App\Repository\TagsRepository;
-use App\Service\ActionOnDbService;
+use App\Service\TagsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,24 +32,22 @@ class TagsController extends AbstractController
      * @var TagsRepository
      */
     private TagsRepository $tagsRepository;
+
     /**
-     * @var ActionOnDbService
+     * @var TagsService
      */
-    private ActionOnDbService $actionOnDb;
+    private TagsService $tagsService;
 
     /**
      * TagsController constructor.
      * @param TagsRepository $tagsRepository
-     * @param ActionOnDbService $actionOnDb
+     * @param TagsService $tagsService
      */
-    public function __construct
-    (
-        TagsRepository $tagsRepository,
-        ActionOnDbService $actionOnDb
-    )
+    public function __construct(TagsRepository $tagsRepository, TagsService $tagsService)
     {
         $this->tagsRepository = $tagsRepository;
-        $this->actionOnDb = $actionOnDb;
+        $this->tagsService = $tagsService;
+
     }
 
     /**
@@ -80,8 +78,8 @@ class TagsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->actionOnDb
-                ->addElement($tag)
+            $this->tagsService
+                ->addTag($tag)
                 ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('tags_index');
@@ -121,8 +119,8 @@ class TagsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->actionOnDb
-                ->addElement($tag)
+            $this->tagsService
+                ->addTag($tag)
                 ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('tags_index');
@@ -144,8 +142,8 @@ class TagsController extends AbstractController
     public function delete(Request $request, Tags $tag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
-            $this->actionOnDb
-                ->removeElement($tag)
+            $this->tagsService
+                ->removeTag($tag)
                 ->executeUpdateOnDatabase();
         }
 

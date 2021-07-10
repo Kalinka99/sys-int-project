@@ -14,7 +14,7 @@ namespace App\Controller;
 use App\Entity\Users;
 use App\Form\UsersType;
 use App\Repository\UsersRepository;
-use App\Service\ActionOnDbService;
+use App\Service\UsersService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,24 +31,22 @@ class UsersController extends AbstractController
      * @var UsersRepository
      */
     private UsersRepository $usersRepository;
+
     /**
-     * @var ActionOnDbService
+     * @var UsersService
      */
-    private ActionOnDbService $actionOnDb;
+    private UsersService $usersService;
 
     /**
      * UsersController constructor.
      * @param UsersRepository $usersRepository
-     * @param ActionOnDbService $actionOnDb
+     * @param UsersService $usersService
      */
     public function __construct
-    (
-        UsersRepository $usersRepository,
-        ActionOnDbService $actionOnDb
-    )
+    (UsersRepository $usersRepository, UsersService $usersService)
     {
         $this->usersRepository = $usersRepository;
-        $this->actionOnDb = $actionOnDb;
+        $this->usersService = $usersService;
     }
 
     /**
@@ -95,8 +93,8 @@ class UsersController extends AbstractController
                 $user->setContact($form->getData()['contact']);
             }
 
-            $this->actionOnDb
-                ->addElement($user)
+            $this->usersService
+                ->editUser($user)
                 ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('users_index');

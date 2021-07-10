@@ -18,7 +18,9 @@ use App\Form\CommentsType;
 use App\Repository\ArticlesRepository;
 use App\Repository\CategoriesRepository;
 use App\Repository\TagsRepository;
-use App\Service\ActionOnDbService;
+use App\Service\ArticlesService;
+use App\Service\CategoriesService;
+use App\Service\CommentsService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,22 +38,39 @@ class ArticlesController extends AbstractController
      * @var ArticlesRepository
      */
     private ArticlesRepository $articleRepository;
+
     /**
      * @var CategoriesRepository
      */
     private CategoriesRepository $categoriesRepository;
+
     /**
      * @var TagsRepository
      */
     private TagsRepository $tagsRepository;
+
     /**
      * @var PaginatorInterface
      */
     private PaginatorInterface $paginator;
+
     /**
-     * @var ActionOnDbService
+     * Categories service.
+     * @var CategoriesService
      */
-    private ActionOnDbService $actionOnDb;
+    private CategoriesService $categoriesService;
+
+    /**
+     * Comments Service.
+     * @var CommentsService
+     */
+    private CommentsService $commentsService;
+
+    /**
+     * Articles service.
+     * @var ArticlesService
+     */
+    private ArticlesService $articlesService;
 
     /**
      * ArticlesController constructor.
@@ -59,22 +78,19 @@ class ArticlesController extends AbstractController
      * @param CategoriesRepository $categoriesRepository
      * @param TagsRepository $tagsRepository
      * @param PaginatorInterface $paginator
-     * @param ActionOnDbService $actionOnDb
+     * @param CategoriesService $categoriesService
+     * @param ArticlesService $articlesService
+     * @param CommentsService $commentsService
      */
-    public function __construct
-    (
-        ArticlesRepository $articleRepository,
-        CategoriesRepository $categoriesRepository,
-        TagsRepository $tagsRepository,
-        PaginatorInterface $paginator,
-        ActionOnDbService $actionOnDb
-    )
+    public function __construct(ArticlesRepository $articleRepository, CategoriesRepository $categoriesRepository, TagsRepository $tagsRepository, PaginatorInterface $paginator, CategoriesService $categoriesService, ArticlesService $articlesService, CommentsService $commentsService)
     {
         $this->articleRepository = $articleRepository;
         $this->categoriesRepository = $categoriesRepository;
         $this->tagsRepository = $tagsRepository;
         $this->paginator = $paginator;
-        $this->actionOnDb = $actionOnDb;
+        $this->categoriesService = $categoriesService;
+        $this->commentsService = $commentsService;
+        $this->articlesService = $articlesService;
     }
 
     /**
@@ -125,8 +141,8 @@ class ArticlesController extends AbstractController
                 ->setUsers($this->getUser())
                 ->addTag($this->tagsRepository->findOneById($data['tags']));
 
-            $this->actionOnDb
-                ->addElement($article)
+            $this->articlesService
+                ->addArticle($article)
                 ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('articles_index');
@@ -159,8 +175,8 @@ class ArticlesController extends AbstractController
                 ->setCreated(new \DateTime('now'))
                 ->setArticles($article);
 
-            $this->actionOnDb
-                ->addElement($comment)
+            $this->commentsService
+                ->addComment($comment)
                 ->executeUpdateOnDatabase();
         }
 
@@ -198,8 +214,8 @@ class ArticlesController extends AbstractController
                 ->setMainText($data['mainText'])
                 ->setCategories($this->categoriesRepository->findOneById($data['categories']));
 
-            $this->actionOnDb
-                ->addElement($article)
+            $this->articlesService
+                ->addArticle($article)
                 ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('articles_index');
@@ -268,7 +284,7 @@ class ArticlesController extends AbstractController
             if(!empty($article->getComments() )){
                 foreach ($article->getComments() as $comment){
                     $article->removeComment($comment);
-                    $this->actionOnDb->removeElement($comment);
+                    $this->commentsService->removeComment($comment);
                 }
             }
             if (!empty($article->getTags() )){
@@ -277,8 +293,8 @@ class ArticlesController extends AbstractController
                 }
             }
 
-            $this->actionOnDb
-                ->removeElement($article)
+            $this->articlesService
+                ->removeArticle($article)
                 ->executeUpdateOnDatabase();
         }
         return $this->redirectToRoute('articles_index');

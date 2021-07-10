@@ -13,7 +13,7 @@
 namespace App\Controller;
 
 use App\Entity\Comments;
-use App\Service\ActionOnDbService;
+use App\Service\CommentsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,20 +27,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentsController extends AbstractController
 {
     /**
-     * @var ActionOnDbService
+     * Comments Service.
+     * @var CommentsService
      */
-    private ActionOnDbService $actionOnDb;
+    private CommentsService $commentsService;
 
     /**
      * CommentsController constructor.
-     * @param ActionOnDbService $actionOnDb
+     * @param CommentsService $commentsService
      */
-    public function __construct
-    (
-        ActionOnDbService $actionOnDb
-    )
+    public function __construct(CommentsService $commentsService)
     {
-        $this->actionOnDb = $actionOnDb;
+        $this->commentsService = $commentsService;
     }
 
     /**
@@ -55,8 +53,8 @@ class CommentsController extends AbstractController
         $articleId = $comment->getArticles()->getId();
 
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
-            $this->actionOnDb
-                ->removeElement($comment)
+            $this->commentsService
+                ->removeComment($comment)
                 ->executeUpdateOnDatabase();
         }
 

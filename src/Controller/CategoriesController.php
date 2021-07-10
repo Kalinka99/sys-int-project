@@ -15,7 +15,9 @@ namespace App\Controller;
 use App\Entity\Categories;
 use App\Form\CategoriesType;
 use App\Repository\CategoriesRepository;
-use App\Service\ActionOnDbService;
+use App\Service\ArticlesService;
+use App\Service\CategoriesService;
+use App\Service\CommentsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,24 +35,39 @@ class CategoriesController extends AbstractController
      * @var CategoriesRepository
      */
     private CategoriesRepository $categoriesRepository;
+
     /**
-     * @var ActionOnDbService
+     * Categories service.
+     * @var CategoriesService
      */
-    private ActionOnDbService $actionOnDb;
+    private CategoriesService $categoriesService;
+
+    /**
+     * Comments Service.
+     * @var CommentsService
+     */
+    private CommentsService $commentsService;
+
+    /**
+     * Articles service.
+     * @var ArticlesService
+     */
+    private ArticlesService $articlesService;
 
     /**
      * CategoriesController constructor.
      * @param CategoriesRepository $categoriesRepository
-     * @param ActionOnDbService $actionOnDb
+     * @param CategoriesService $categoriesService
+     * @param CommentsService $commentsService
+     * @param ArticlesService $articlesService
      */
-    public function __construct
-    (
-        CategoriesRepository $categoriesRepository,
-        ActionOnDbService $actionOnDb
-    )
+    public function __construct(CategoriesRepository $categoriesRepository, CategoriesService $categoriesService, CommentsService $commentsService, ArticlesService $articlesService)
     {
         $this->categoriesRepository = $categoriesRepository;
-        $this->actionOnDb = $actionOnDb;
+        $this->categoriesService = $categoriesService;
+        $this->commentsService = $commentsService;
+        $this->articlesService = $articlesService;
+
     }
 
     /**
@@ -80,8 +97,8 @@ class CategoriesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->actionOnDb
-                ->addElement($category)
+            $this->categoriesService
+                ->addCategory($category)
                 ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('categories_index');
@@ -132,8 +149,8 @@ class CategoriesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->actionOnDb
-                ->addElement($category)
+            $this->categoriesService
+                ->addCategory($category)
                 ->executeUpdateOnDatabase();
 
             return $this->redirectToRoute('categories_index');
@@ -157,14 +174,14 @@ class CategoriesController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
 
             if (!empty($category->getArticles())) {
-                foreach ($category->getArticles() as $article){
+                foreach ($category->getArticles() as $article) {
                     $article->setUsers(null);
                     $article->setCategories(null);
 
                     if (!empty($article->getComments())) {
                         foreach ($article->getComments() as $comment){
                             $article->removeComment($comment);
-                            $this->actionOnDb->removeElement($comment);
+                            $this->commentsService->removeComment($comment);
                         }
                     }
 
@@ -174,12 +191,11 @@ class CategoriesController extends AbstractController
                         }
                     }
 
-                    $this->actionOnDb->removeElement($article);
+                    $this->articlesService->removeArticle($article);
                 }
             }
-
-            $this->actionOnDb
-                ->removeElement($category)
+            $this->categoriesService
+                ->removeCategory($category)
                 ->executeUpdateOnDatabase();
         }
 

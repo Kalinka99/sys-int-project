@@ -82,7 +82,9 @@ class ArticlesController extends AbstractController
      * @param ArticlesService $articlesService
      * @param CommentsService $commentsService
      */
-    public function __construct(ArticlesRepository $articleRepository, CategoriesRepository $categoriesRepository, TagsRepository $tagsRepository, PaginatorInterface $paginator, CategoriesService $categoriesService, ArticlesService $articlesService, CommentsService $commentsService)
+    public function __construct(
+        ArticlesRepository $articleRepository,
+                                CategoriesRepository $categoriesRepository, TagsRepository $tagsRepository, PaginatorInterface $paginator, CategoriesService $categoriesService, ArticlesService $articlesService, CommentsService $commentsService)
     {
         $this->articleRepository = $articleRepository;
         $this->categoriesRepository = $categoriesRepository;
@@ -103,10 +105,14 @@ class ArticlesController extends AbstractController
     {
         $articles = $this->articleRepository->findBy([], ['id'=>'DESC']);
         $articles = $this->paginator->paginate($articles, $page,10);
+//
+//        $page = $request->query->getInt(1);
+//        $pagination = $this->articlesService->createPaginatedList($page);
         $categories = $this->categoriesRepository->findAll();
 
         return $this->render('articles/index.html.twig', [
             'articles' => $articles,
+//            'pagination' => $pagination,
             'categories' => $categories,
         ]);
     }

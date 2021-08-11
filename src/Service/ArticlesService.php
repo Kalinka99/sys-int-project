@@ -11,7 +11,11 @@
 
 namespace App\Service;
 
+use App\Repository\ArticlesRepository;
+use App\Repository\CategoriesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Class ArticlesService.
@@ -24,12 +28,38 @@ class ArticlesService
     private EntityManagerInterface $entityManager;
 
     /**
+     * @var ArticlesRepository
+     */
+    private ArticlesRepository $articlesRepository;
+
+    /**
+     * Paginator.
+     *
+     * @var PaginatorInterface
+     */
+    private PaginatorInterface $paginator;
+
+    /**
      * ArticlesService constructor.
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $entityManager){
+    public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator, ArticlesRepository $articlesRepository) {
         $this->entityManager = $entityManager;
+        $this->paginator = $paginator;
+        $this->articlesRepository = $articlesRepository;
     }
+
+    /**
+     * Create paginated list.
+     * @param int $page Page number
+     * @return PaginationInterface Paginated list
+     */
+    public function createPaginatedList(int $page): PaginationInterface
+    {
+            $articles = $this->articlesRepository->findBy([], ['id'=>'DESC']);
+            return $articles = $this->paginator->paginate($articles, $page,10);
+    }
+
 
     /**
      * Adds an article.

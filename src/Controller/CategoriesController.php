@@ -77,6 +77,7 @@ class CategoriesController extends AbstractController
      */
     public function index(): Response
     {
+//        $categories = $this->categoriesService->findAllCategories();
         $categories = $this->categoriesRepository->findAll();
 
         return $this->render('categories/index.html.twig', [

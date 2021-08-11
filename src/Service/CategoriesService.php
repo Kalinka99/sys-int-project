@@ -11,6 +11,7 @@
 
 namespace App\Service;
 
+use App\Repository\CategoriesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -22,6 +23,11 @@ class CategoriesService
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
+
+    /**
+     * @var CategoriesRepository $categoriesRepository
+     */
+    private CategoriesRepository $categoriesRepository;
 
     /**
      * CategoriesService constructor.
@@ -61,4 +67,9 @@ class CategoriesService
     {
         $this->entityManager->flush();
     }
+//
+//    public function findAllCategories(){
+//        return $this->categoriesRepository->findAll();
+//    }
+
 }
